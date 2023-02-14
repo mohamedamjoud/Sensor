@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ubCH+SSEHm/r2n3bh8sLgh2fTIl+iU+PDSda2LA5Pw+0X6SEWrTntgi5HX4onqP98cl7qsCsWh7MmKgb5tLKsg==",
+  "success": true,
+  "projectFilePath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Adapter.Api/Adapter.Api.csproj",
+  "expectedPackageFiles": [
+    "/Users/formation/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/formation/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/formation/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/formation/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/formation/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/formation/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
