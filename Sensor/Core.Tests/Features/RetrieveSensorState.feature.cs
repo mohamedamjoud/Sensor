@@ -107,7 +107,7 @@ namespace Core.Tests.Features
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
-        testRunner.Then("the state should be \'HOT\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the state should be \'Hot\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 7
         testRunner.And("the temperature will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -150,7 +150,7 @@ namespace Core.Tests.Features
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
-        testRunner.Then("the state should be \'HOT\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the state should be \'Hot\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 13
         testRunner.And("the temperature will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -195,7 +195,7 @@ namespace Core.Tests.Features
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 18
-        testRunner.Then("the state should be \'COLD\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the state should be \'Cold\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 19
         testRunner.And("the temperature will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -238,7 +238,7 @@ namespace Core.Tests.Features
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 24
-        testRunner.Then("the state should be \'WARM\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the state should be \'Warm\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 25
         testRunner.And("the temperature will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -281,7 +281,7 @@ namespace Core.Tests.Features
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 30
-        testRunner.Then("the state should be \'WARM\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the state should be \'Warm\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 31
         testRunner.And("the temperature will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

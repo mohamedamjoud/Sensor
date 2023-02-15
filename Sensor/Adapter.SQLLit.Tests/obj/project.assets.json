@@ -1856,6 +1856,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "Adapter.SQLLit/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Adapter.SQLLit.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Adapter.SQLLit.dll": {}
+        }
       }
     }
   },
@@ -6375,10 +6385,16 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "Adapter.SQLLit/1.0.0": {
+      "type": "project",
+      "path": "../Adapter.SQLLit/Adapter.SQLLit.csproj",
+      "msbuildProject": "../Adapter.SQLLit/Adapter.SQLLit.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Adapter.SQLLit >= 1.0.0",
       "FluentAssertions >= 6.2.0",
       "Microsoft.NET.Test.Sdk >= 17.0.0",
       "NUnit3TestAdapter >= 4.1.0",
@@ -6411,7 +6427,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/formation/Desktop/Projects/Sensor/Sensor/Adapter.SQLLit/Adapter.SQLLit.csproj": {
+              "projectPath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Adapter.SQLLit/Adapter.SQLLit.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

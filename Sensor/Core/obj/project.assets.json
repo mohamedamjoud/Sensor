@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/formation/Desktop/Projects/Sensor/Sensor/Domain/Domain.csproj",
-      "projectName": "Domain",
-      "projectPath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Domain/Domain.csproj",
+      "projectUniqueName": "/Users/formation/Desktop/Projects/Sensor/Sensor/Core/Core.csproj",
+      "projectName": "Core",
+      "projectPath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Core/Core.csproj",
       "packagesPath": "/Users/formation/.nuget/packages/",
-      "outputPath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Domain/obj/",
+      "outputPath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/formation/.nuget/NuGet/NuGet.Config"

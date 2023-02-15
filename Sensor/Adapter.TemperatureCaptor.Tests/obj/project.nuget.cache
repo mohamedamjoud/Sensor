@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8OAQra6jl8u2FDcIn0ft67uF+Pk/6imbWw5YGaQPrK7NASIvXa7CgGIDr6mfb9TQuG/UOZ+TN7ZogI4jLLwVdA==",
+  "dgSpecHash": "0fBRdiEfJXW08S2bkk6s9cLfw/SWwf8Zunw03DYefeu/KpSvbEMp5OYf9S/1SOMSOFbAupzyT2tkI7e/Y+BUfQ==",
   "success": true,
   "projectFilePath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Adapter.TemperatureCaptor.Tests/Adapter.TemperatureCaptor.Tests.csproj",
   "expectedPackageFiles": [
