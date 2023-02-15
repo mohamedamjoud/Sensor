@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Tests.Drivers
+namespace Core.Tests.Drivers
 {
     public class Driver
     {

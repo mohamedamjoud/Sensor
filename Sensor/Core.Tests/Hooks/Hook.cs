@@ -1,7 +1,7 @@
 using System;
 using TechTalk.SpecFlow;
 
-namespace Domain.Tests.Hooks
+namespace Core.Tests.Hooks
 {
     [Binding]
     public class Hooks

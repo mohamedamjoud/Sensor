@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Api", "Adapter.Api\Adapter.Api.csproj", "{3A83B809-2B07-4B21-B3D6-2D492CEA5411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{284225CE-4237-43E8-A415-4FFD6C74DCEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{284225CE-4237-43E8-A415-4FFD6C74DCEE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLLit", "Adapter.SQLLit\Adapter.SQLLit.csproj", "{71AF6BB6-748A-4CC1-98D3-85DABC9FBD80}"
 EndProject
@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.TemperatureCaptor.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLLit.Tests", "Adapter.SQLLit.Tests\Adapter.SQLLit.Tests.csproj", "{770EFB38-62B5-4C2B-BFD0-EAE0A10B7595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Tests\Domain.Tests.csproj", "{CBE5C05F-F79C-426B-A7AA-CD7947E55972}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{CBE5C05F-F79C-426B-A7AA-CD7947E55972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
