@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace Core.Tests.Steps;
 
 [Binding]
-public  sealed class RetrieveSensorStateDefinitions
+public sealed class RetrieveSensorStateDefinitions
 {
-    private readonly Mock<ICaptor> _captor;
+    private readonly Mock<ICaptorPort> _captor;
     private IRetrieveSensorState _retrieveSensorState;
     private readonly Mock<ITemperatureRepositoryPort> _temperatureRepository; 
     private string _state;
@@ -17,7 +17,7 @@ public  sealed class RetrieveSensorStateDefinitions
     
     public RetrieveSensorStateDefinitions()
     {
-        _captor = new Mock<ICaptor>();
+        _captor = new Mock<ICaptorPort>();
         _temperatureRepository = new Mock<ITemperatureRepositoryPort>();
     }
 
