@@ -1,12 +1,12 @@
 using System.Linq.Expressions;
 
-namespace Core.Domain.Sonsor;
+namespace Core.Domain.Sensor;
 
 internal record State 
 {
-    public StateEnum Value { get; }
+    internal StateEnum Value { get; }
 
-    public State(int temperature)
+    internal State(int temperature)
     {
         switch (temperature)
         {

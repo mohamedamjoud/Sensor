@@ -1,6 +1,6 @@
 namespace Core.SpiPort;
 
-public interface ICaptor
+public interface ICaptorPort
 {
     Task<int> GetTemperature();
 }

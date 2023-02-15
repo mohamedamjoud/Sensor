@@ -1,16 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Domain.Sonsor;
+namespace Core.Domain.Sensor;
 
-public class Sensor
+internal class Sensor
 {
-    public string State
+    internal string State
     {
         get => _state.Value.ToString();
     }
     private readonly State _state;
     
-    public Sensor(int temperature)
+    internal Sensor(int temperature)
     {
         _state = new State(temperature);
     }

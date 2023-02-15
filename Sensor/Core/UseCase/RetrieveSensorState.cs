@@ -1,16 +1,18 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Core.ApiPort;
-using Core.Domain.Sonsor;
+using Core.Domain.Sensor;
 using Core.SpiPort;
 
+[assembly: InternalsVisibleTo("Core.Tests")]
 namespace Core.UseCase;
 
-public class RetrieveSensorState : IRetrieveSensorState
+internal class RetrieveSensorState : IRetrieveSensorState
 {
-    private readonly ICaptor Captor;
+    private readonly ICaptorPort Captor;
     private readonly ITemperatureRepositoryPort TemperatureRepository;
 
-    public RetrieveSensorState(ICaptor captor, ITemperatureRepositoryPort temperatureRepository)
+    internal RetrieveSensorState(ICaptorPort captor, ITemperatureRepositoryPort temperatureRepository)
     {
         Captor = captor;
         TemperatureRepository = temperatureRepository;

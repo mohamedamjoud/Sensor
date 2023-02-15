@@ -1,6 +1,6 @@
-namespace Core.Domain.Sonsor;
+namespace Core.Domain.Sensor;
 
-public enum StateEnum
+internal enum StateEnum
 {
     Hot,
     Cold,
