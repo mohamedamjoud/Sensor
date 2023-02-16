@@ -17,7 +17,7 @@ namespace Adapter.SQLLit.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
 
-            modelBuilder.Entity("Adapter.SQLLit.Models.TemperatureRequest", b =>
+            modelBuilder.Entity("Adapter.SQLLit.Models.SensorState", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,7 +31,7 @@ namespace Adapter.SQLLit.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TemperatureRequest", (string)null);
+                    b.ToTable("SensorState", (string)null);
                 });
 #pragma warning restore 612, 618
         }

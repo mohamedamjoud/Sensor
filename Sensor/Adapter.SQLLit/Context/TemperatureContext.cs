@@ -11,7 +11,7 @@ public class TemperatureContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<TemperatureRequest>().ToTable("TemperatureRequest");
+        modelBuilder.Entity<SensorState>().ToTable("SensorState");
     }
-    public DbSet<TemperatureRequest> TemperatureRequests { get; set; }
+    public DbSet<SensorState> TemperatureRequests { get; set; }
 }

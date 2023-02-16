@@ -12,7 +12,7 @@ namespace Adapter.SQLLit.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TemperatureRequest",
+                name: "SensorState",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -30,7 +30,7 @@ namespace Adapter.SQLLit.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TemperatureRequest");
+                name: "SensorState");
         }
     }
 }
