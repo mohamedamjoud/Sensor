@@ -1,5 +1,6 @@
 using Core.SpiPort;
 using Core.ApiPort;
+using Core.Domain.Sensor;
 using Core.UseCase;
 using Moq;
 using NUnit.Framework;
@@ -11,14 +12,14 @@ public sealed class RetrieveSensorStateDefinitions
 {
     private readonly Mock<ICaptorPort> _captor;
     private IRetrieveSensorState _retrieveSensorState;
-    private readonly Mock<ITemperatureRepositoryPort> _temperatureRepository; 
+    private readonly Mock<ISensorStateRepositoryPort> _sensorStateRepository; 
     private string _state;
     private int _temperature;
     
     public RetrieveSensorStateDefinitions()
     {
         _captor = new Mock<ICaptorPort>();
-        _temperatureRepository = new Mock<ITemperatureRepositoryPort>();
+        _sensorStateRepository = new Mock<ISensorStateRepositoryPort>();
     }
 
     [Given(@"temperature value is equal to '(.*)'")]
@@ -26,8 +27,8 @@ public sealed class RetrieveSensorStateDefinitions
     {
         _temperature = temperature;
         _captor.Setup(c => c.GetTemperature()).Returns(() => Task.FromResult(temperature));
-        _temperatureRepository.Setup(tr => tr.Save(temperature)).Returns(() => Task.FromResult(1));
-        _retrieveSensorState = new RetrieveSensorState(_captor.Object,_temperatureRepository.Object);
+        _sensorStateRepository.Setup(tr => tr.Save(It.IsAny<State>())).Returns(() => Task.FromResult(1));
+        _retrieveSensorState = new RetrieveSensorState(_captor.Object,_sensorStateRepository.Object);
     }
 
     [When(@"we try to retrieve the sensor state")]
@@ -36,15 +37,15 @@ public sealed class RetrieveSensorStateDefinitions
         _state = await _retrieveSensorState.Execute();
     }
 
-    [Then(@"the state should be '(.*)'")]
-    public void ThenTheStateShouldBe(string state)
+    [Then(@"the state value should be '(.*)'")]
+    public void ThenTheStateValueShouldBe(string state)
     {
         Assert.AreEqual(state, _state);
     }
 
-    [Then(@"the temperature will be saved")]
-    public void ThenTheTemperatureWillBeSaved()
+    [Then(@"the state will be saved")]
+    public void ThenTheStateWillBeSaved()
     {
-        _temperatureRepository.Verify(tr=> tr.Save(_temperature), Times.Once());
+        _sensorStateRepository.Verify(tr=> tr.Save(It.IsAny<State>()), Times.Once());
     }
 }

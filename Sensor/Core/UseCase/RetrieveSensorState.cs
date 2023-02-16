@@ -9,28 +9,30 @@ namespace Core.UseCase;
 
 internal class RetrieveSensorState : IRetrieveSensorState
 {
-    private readonly ICaptorPort Captor;
-    private readonly ITemperatureRepositoryPort TemperatureRepository;
+    private readonly ICaptorPort _captor;
+    private readonly ISensorStateRepositoryPort _sensorStateRepository;
 
-    internal RetrieveSensorState(ICaptorPort captor, ITemperatureRepositoryPort temperatureRepository)
+    internal RetrieveSensorState(ICaptorPort captor, ISensorStateRepositoryPort sensorStateRepository)
     {
-        Captor = captor;
-        TemperatureRepository = temperatureRepository;
+        _captor = captor;
+        _sensorStateRepository = sensorStateRepository;
     }
     public async Task<string> Execute()
     {
-        var temperature = await Captor.GetTemperature();
+        var temperature = await _captor.GetTemperature();
         var sensor = new Sensor(temperature);
-
+        int response;
         try
         {
-            await TemperatureRepository.Save(temperature);
+            response = await _sensorStateRepository.Save(sensor.State);
+            //if (response != 1)
+              //  throw new Exception("temperature not saved");
         }
         catch (Exception e)
         {
             throw new Exception("temperature not saved");
         }
         
-        return sensor.State;
+        return sensor.State.Name;
     }
 }
