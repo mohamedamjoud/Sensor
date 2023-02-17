@@ -666,6 +666,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Core": "1.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.3"
         },
         "compile": {
@@ -673,6 +674,16 @@
         },
         "runtime": {
           "bin/placeholder/Adapter.SQLLit.dll": {}
+        }
+      },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
         }
       }
     }
@@ -1534,6 +1545,11 @@
       "type": "project",
       "path": "../Adapter.SQLLit/Adapter.SQLLit.csproj",
       "msbuildProject": "../Adapter.SQLLit/Adapter.SQLLit.csproj"
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
     }
   },
   "projectFileDependencyGroups": {

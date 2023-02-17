@@ -6,13 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Adapter.SQLLit.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TemperatureRequest");
+
             migrationBuilder.CreateTable(
-                name: "TemperatureRequest",
+                name: "SensorState",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -22,7 +25,7 @@ namespace Adapter.SQLLit.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TemperatureRequest", x => x.Id);
+                    table.PrimaryKey("PK_SensorState", x => x.Id);
                 });
         }
 
@@ -30,7 +33,21 @@ namespace Adapter.SQLLit.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TemperatureRequest");
+                name: "SensorState");
+
+            migrationBuilder.CreateTable(
+                name: "TemperatureRequest",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Value = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemperatureRequest", x => x.Id);
+                });
         }
     }
 }

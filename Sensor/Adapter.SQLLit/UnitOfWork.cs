@@ -14,6 +14,6 @@ public class UnitOfWork : IUnitOfWork
     }
     public async Task<int> Save(State state)
     {
-        return await Repository.Add(new SensorState(state));
+        return await Repository.Add(new SensorState(state.Value,state.DateTime));
     }
 }

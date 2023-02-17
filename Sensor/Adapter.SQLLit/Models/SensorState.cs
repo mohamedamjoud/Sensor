@@ -9,10 +9,10 @@ public class SensorState
     public int Id { get; set; }
     public int Value { get; set; }
     public DateTime DateTime { get; set; }
-
-    public SensorState(State state)
+    
+    public SensorState(int value,DateTime dateTime)
     {
-        Value = state.Value;
-        DateTime = state.DateTime;
+        Value = value;
+        DateTime = dateTime;
     }
 }
