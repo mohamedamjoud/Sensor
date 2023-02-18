@@ -7,12 +7,12 @@ using Core.SpiPort;
 [assembly: InternalsVisibleTo("Core.Tests")]
 namespace Core.UseCase;
 
-internal class RetrieveSensorState : IRetrieveSensorState
+public class RetrieveSensorState : IRetrieveSensorState
 {
     private readonly ICaptorPort _captor;
     private readonly ISensorStateRepositoryPort _sensorStateRepository;
 
-    internal RetrieveSensorState(ICaptorPort captor, ISensorStateRepositoryPort sensorStateRepository)
+    public RetrieveSensorState(ICaptorPort captor, ISensorStateRepositoryPort sensorStateRepository)
     {
         _captor = captor;
         _sensorStateRepository = sensorStateRepository;
