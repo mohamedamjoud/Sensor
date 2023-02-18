@@ -1,4 +1,11 @@
+using Adapter.SQLLit;
 using Adapter.SQLLit.Context;
+using Adapter.SQLLit.Models;
+using Adapter.SQLLit.Repository;
+using Adapter.TemperatureCaptor;
+using Core.ApiPort;
+using Core.SpiPort;
+using Core.UseCase;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+
+builder.Services.AddTransient<IRetrieveSensorState, RetrieveSensorState>();
+
+builder.Services.AddTransient<ICaptorPort, DummyTemperatureCaptor>();
+
+builder.Services.AddScoped<ISensorStateRepositoryPort,UnitOfWork>(); 
+
+builder.Services.AddScoped<IRepository<SensorState>, Repository<SensorState>>();
+
 builder.Services.AddDbContext<TemperatureContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 

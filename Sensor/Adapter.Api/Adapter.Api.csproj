@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Adapter.SQLLit\Adapter.SQLLit.csproj" />
+      <ProjectReference Include="..\Adapter.TemperatureCaptor\Adapter.TemperatureCaptor.csproj" />
     </ItemGroup>
 
 </Project>
