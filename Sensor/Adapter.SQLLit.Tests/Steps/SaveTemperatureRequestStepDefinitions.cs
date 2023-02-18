@@ -2,6 +2,7 @@
 using Adapter.SQLLit.Models;
 using Adapter.SQLLit.Repository;
 using Core.Domain.Sensor;
+using Core.SpiPort;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
@@ -11,7 +12,7 @@ namespace Adapter.SQLLit.Tests.Steps;
 public sealed class SaveTemperatureRequestStepDefinitions
 {
     private State _state;
-    private IUnitOfWork _unitOfWork;
+    private ISensorStateRepositoryPort _unitOfWork;
     private Mock<IRepository<SensorState>> _sensorRepository;
     
     public SaveTemperatureRequestStepDefinitions()
