@@ -23,7 +23,7 @@ public sealed class RetrieveSensorStateDefinitions
     }
 
     [Given(@"temperature value is equal to '(.*)'")]
-    public void GivenTemperatureValueIsEqualTo(int temperature)
+    public void GivenTemperatureValueIsEqualTo(sbyte temperature)
     {
         _temperature = temperature;
         _captor.Setup(c => c.GetTemperature()).Returns(() => Task.FromResult(temperature));

@@ -6,10 +6,10 @@ public record State
 {
     internal string Name { get => _name.ToString(); }
     public  DateTime DateTime { get; }
-    public int Value { get; }
+    public sbyte Value { get; }
 
     private StateEnum _name;
-    public State(int temperature)
+    public State(sbyte temperature)
     {
         switch (temperature)
         {

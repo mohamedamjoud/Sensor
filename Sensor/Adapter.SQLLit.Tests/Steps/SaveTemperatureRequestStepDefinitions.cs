@@ -23,7 +23,7 @@ public sealed class SaveTemperatureRequestStepDefinitions
     }
     
     [Given(@"sensor state value '(.*)'")]
-    public void GivenSensorStateValue(int temperature)
+    public void GivenSensorStateValue(sbyte temperature)
     {
         _state = new State(temperature);
     }

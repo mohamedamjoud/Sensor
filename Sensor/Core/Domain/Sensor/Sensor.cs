@@ -5,7 +5,7 @@ namespace Core.Domain.Sensor;
 public class Sensor
 {
     internal  State State { get; }
-    internal Sensor(int temperature)
+    internal Sensor(sbyte temperature)
     {
         State = new State(temperature);
     }

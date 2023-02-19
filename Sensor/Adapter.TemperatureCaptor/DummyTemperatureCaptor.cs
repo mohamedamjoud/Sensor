@@ -4,11 +4,11 @@ namespace Adapter.TemperatureCaptor;
 
 public class DummyTemperatureCaptor : ICaptorPort
 {
-    private const int EARTH_TEMPERATURE_MAX = 100;
-    private const int EARTH_TEMPERATURE_MIN = -100;
+    private const sbyte EARTH_TEMPERATURE_MAX = 100;
+    private const sbyte EARTH_TEMPERATURE_MIN = -100;
     
-    public Task<int> GetTemperature()
+    public Task<sbyte> GetTemperature()
     {
-        return Task.FromResult(new Random().Next(EARTH_TEMPERATURE_MIN,EARTH_TEMPERATURE_MAX));
+        return Task.FromResult(Convert.ToSByte(new Random().Next(EARTH_TEMPERATURE_MIN,EARTH_TEMPERATURE_MAX)));
     }
 }
