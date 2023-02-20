@@ -1,42 +1,36 @@
-﻿using Adapter.SQLLit.Context;
+using Adapter.SQLLit;
 using Adapter.SQLLit.Models;
 using Adapter.SQLLit.Repository;
 using Core.Domain.Sensor;
 using Core.SpiPort;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace Adapter.SQLLit.Tests.Steps;
+namespace Adapter.SQLit.Tests;
 
-[Binding]
-public sealed class SaveTemperatureRequestStepDefinitions
+public class SensorStateRepositoryTests
 {
     private State _state;
     private ISensorStateRepositoryPort _unitOfWork;
     private Mock<IRepository<SensorState>> _sensorRepository;
     
-    public SaveTemperatureRequestStepDefinitions()
+    [SetUp]
+    public void Setup()
     {
         _sensorRepository = new Mock<IRepository<SensorState>>();
         _sensorRepository.Setup(sr=>sr.Add(It.IsAny<SensorState>())).Returns(It.IsAny<Task<int>>());
         _unitOfWork = new UnitOfWork(_sensorRepository.Object);
     }
-    
-    [Given(@"sensor state value '(.*)'")]
-    public void GivenSensorStateValue(sbyte temperature)
-    {
-        _state = new State(temperature);
-    }
 
-    [When(@"we try to save the sensor state")]
-    public void WhenWeTryToSaveTheSensorState()
+    [Test]
+    public void Add_SaveTemperature_MethodInvoked()
     {
+        //Arrange
+        _state = new State(1);
+        
+        //Act
         _unitOfWork.Save(_state);
-    }
-
-    [Then(@"the sensor state will be saved")]
-    public void ThenTheSensorStateWillBeSaved()
-    {
+        
+        //Assert
         _sensorRepository.Verify(r => r.Add(It.IsAny<SensorState>()), Times.Once);
     }
 }
