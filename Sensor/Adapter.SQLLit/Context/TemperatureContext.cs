@@ -13,5 +13,5 @@ public class TemperatureContext: DbContext
     {
         modelBuilder.Entity<SensorState>().ToTable("SensorState");
     }
-    public DbSet<SensorState> TemperatureRequests { get; set; }
+    public DbSet<SensorState> SensorState { get; set; }
 }
