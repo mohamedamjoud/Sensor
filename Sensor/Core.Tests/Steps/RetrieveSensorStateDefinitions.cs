@@ -15,26 +15,25 @@ public sealed class RetrieveSensorStateDefinitions
     private readonly Mock<ISensorStateRepositoryPort> _sensorStateRepository; 
     private string _state;
     private int _temperature;
+
+
+    private SensorStateContext _context;
     
-    public RetrieveSensorStateDefinitions()
+    public RetrieveSensorStateDefinitions(SensorStateContext context)
     {
-        _captor = new Mock<ICaptorPort>();
-        _sensorStateRepository = new Mock<ISensorStateRepositoryPort>();
+        _context = context;
     }
 
     [Given(@"temperature value is equal to '(.*)'")]
     public void GivenTemperatureValueIsEqualTo(sbyte temperature)
     {
-        _temperature = temperature;
-        _captor.Setup(c => c.GetTemperature()).Returns(() => Task.FromResult(temperature));
-        _sensorStateRepository.Setup(tr => tr.Save(It.IsAny<State>())).Returns(() => Task.FromResult(1));
-        _retrieveSensorState = new RetrieveSensorState(_captor.Object,_sensorStateRepository.Object);
+        _context.MockServices(temperature);
     }
 
     [When(@"we try to retrieve the sensor state")]
     public async void WhenWeTryToRetrieveTheSensorState()
     {
-        _state = await _retrieveSensorState.Execute();
+        _state = await _context.RetrieveSensorState.Execute();
     }
 
     [Then(@"the state value should be '(.*)'")]
@@ -46,6 +45,6 @@ public sealed class RetrieveSensorStateDefinitions
     [Then(@"the state will be saved")]
     public void ThenTheStateWillBeSaved()
     {
-        _sensorStateRepository.Verify(tr=> tr.Save(It.IsAny<State>()), Times.Once());
+       _context.SensorStateRepository.Verify(tr=> tr.Save(It.IsAny<State>()), Times.Once());
     }
 }
