@@ -1,6 +1,6 @@
 namespace Adapter.Api;
 
-public class Sensor
+public record Sensor
 {
     public string State { get; set; }
 }
