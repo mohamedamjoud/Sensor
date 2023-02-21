@@ -13,32 +13,23 @@ namespace Sensor.App.Tests.Steps;
 [Binding]
 public sealed class RetrieveSensorStateStepDefinitions : CustomWebApplicationFactory<Program>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
-    private  HttpClient _client;
-    private readonly IServiceScope _scope;
-    private readonly TemperatureContext _context;
     private HttpResponseMessage Response { get; set; } = null!;
-    
-    public RetrieveSensorStateStepDefinitions(CustomWebApplicationFactory<Program> factory)
+    private SensorStateContext _context;
+    public RetrieveSensorStateStepDefinitions(SensorStateContext context)
     {
-        _factory = factory;
-        _scope = (_factory.Services.GetRequiredService<IServiceScopeFactory>()).CreateScope();
-        _context = _scope.ServiceProvider.GetRequiredService<TemperatureContext>();
-        _context.Database.EnsureCreated();
+        _context = context;
     }
 
     [Given(@"I am a client")]
     public void GivenIAmAClient()
     {
-       
-
-        _client = _factory.CreateDefaultClient();
+        _context._client = _context._factory.CreateDefaultClient();
     }
     
     [When(@"Get request to controller was made")]
     public async Task WhenGetRequestToControllerWasMade()
     {
-        Response = await _client.GetAsync("/api/Sensor");
+        Response = await _context._client.GetAsync("/api/Sensor");
     }
     
     [Then(@"the request status code will be 200")]
@@ -50,30 +41,14 @@ public sealed class RetrieveSensorStateStepDefinitions : CustomWebApplicationFac
     [Given(@"temperature value is equal to '(.*)'")]
     public void GivenTemperatureValueIsEqualTo(sbyte temperature)
     {
-        MockCaptorTemperature(temperature);
+        _context.MockCaptorTemperature(temperature);
     }
-
-    private void MockCaptorTemperature(sbyte temperature)
-    { 
-        var captorMock = new Mock<ICaptorPort>();
-           captorMock.Setup(
-           c => c.GetTemperature()).Returns(Task.FromResult(temperature));
-           
-       _client = _factory.WithWebHostBuilder(builder =>
-       {
-           builder.ConfigureTestServices(services =>
-           {
-               services.AddSingleton(captorMock.Object);
-           });
-
-       }).CreateClient();
-    }
-
+    
     [Then(@"the state value should be '(.*)'")]
     public async Task ThenTheStateValueShouldBe(string expectedState)
     {
-        var response  = await Response.Content.ReadAsStringAsync();
-        Adapter.Api.Sensor sensor = JsonConvert.DeserializeObject<Adapter.Api.Sensor>(response); 
+        var content  = await Response.Content.ReadAsStringAsync();
+        Adapter.Api.Sensor sensor = JsonConvert.DeserializeObject<Adapter.Api.Sensor>(content); 
         Assert.AreEqual(expectedState, sensor.State);
     }
 }
