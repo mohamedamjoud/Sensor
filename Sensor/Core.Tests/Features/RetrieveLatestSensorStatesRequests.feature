@@ -1,23 +1,7 @@
-Feature: RetrieveLatestSensorStatesRequests
+Feature: Retrieve Latest Sensor States Requests
 
-@mytag
-Scenario: RetrieveTheLatestFifteenSensorStatesRequests.
-	Given The sensor returns these temperatures
-	  | temperature |
-	  |       1     |
-	  |       2     |
-	  |       3     |
-	  |       4     |
-	  |       5     |
-	  |       6     |
-	  |       7     |
-	  |       8     |
-	  |       9     |
-	  |       45    |
-	  |       45    |
-	  |       45    |
-	  |       45    |
-	  |       45    |
-	  |       45    |
+Scenario: Retrieve The Latest Fifteen Sensor States Requests.
+	Given I am adapter, I need latest '15' sensor states requests
 	When We try to retrieve the latest Fifteen Sensor States Requests.
-	Then We got the same sensor states
+	Then The sensor state repository should be invoked with size '15' in parameters
+	

@@ -10,39 +10,32 @@ namespace Core.Tests.Steps;
 [Binding]
 public class RetrieveLatestSensorStatesRequests
 {
-
-    private SensorStateContext _context;
-    private List<string> _insertedRequest;
-    private List<string> _retrievedRequest;
-    
-    public RetrieveLatestSensorStatesRequests(SensorStateContext context)
+    private IRetrieveLatestRequestsStates _retrieveLatestRequestsStates;
+    private readonly Mock<ISensorStateRepositoryPort> _sensorStateRepository;
+    public RetrieveLatestSensorStatesRequests()
     {
-        _context = context;
-        _insertedRequest = new List<string>();
-        _retrievedRequest = new List<string>();
+        _sensorStateRepository = new Mock<ISensorStateRepositoryPort>();
     }
     
-    [Given(@"The sensor returns these temperatures")]
-    public async Task GivenTheSensorReturnsTheseTemperatures(Table table)
+    [Given(@"I am adapter, I need latest '(.*)' sensor states requests")]
+    public void GivenIAmAdapterINeedLatestSensorStatesRequests(sbyte size)
     {
-        var temperatures = table.Rows.Select(row => sbyte.Parse(row.Values.ToList()[0]));
-        foreach (var temperature in temperatures)
-        {
-            _context.MockServices(temperature);
-            var state = await _context.RetrieveSensorState.Execute();
-            _insertedRequest.Add(state);
-        }
+        _sensorStateRepository.Setup(str => str.GetLatestRequestsStates(size))
+            .Returns(Task.FromResult(new List<State>()));
+        _retrieveLatestRequestsStates = new RetrieveLatestRequestsStates(_sensorStateRepository.Object);
     }
-
+    
     [When(@"We try to retrieve the latest Fifteen Sensor States Requests\.")]
-    public async Task WhenWeTryToRetrieveTheLatestFifteenSensorStatesRequests()
+    public void WhenWeTryToRetrieveTheLatestFifteenSensorStatesRequests()
     {
-        _retrievedRequest = await new RetriveLatestRequestesStates().Execute();
+        _retrieveLatestRequestsStates.Execute();
+    }
+    
+    [Then(@"The sensor state repository should be invoked with size '(.*)' in parameters")]
+    public void ThenTheSensorStateRepositoryShouldBeInvokedWithSizeInParameters(sbyte size)
+    {
+        _sensorStateRepository.Verify(str=> str.GetLatestRequestsStates(size), Times.Once());
     }
 
-    [Then(@"We got the same sensor states")]
-    public void ThenWeGotTheSameSensorStates()
-    {
-        Assert.AreEqual(_retrievedRequest, _insertedRequest);
-    }
+
 }
