@@ -4,12 +4,28 @@ namespace Core.Domain.Sensor;
 
 public record State 
 {
-    internal string Name { get => _name.ToString(); }
+    public string Name { get => _name.ToString(); }
     public  DateTime DateTime { get; }
     public sbyte Value { get; }
 
     private StateEnum _name;
     public State(sbyte temperature)
+    {
+        DateTime = DateTime.Now;
+        Value = temperature;
+        
+        SetState(temperature);
+    }
+
+    private State(DateTime dateTime, sbyte temperature)
+    {
+        DateTime = dateTime;
+        Value = temperature;
+        
+        SetState(temperature);
+    }
+
+    private void SetState(sbyte temperature)
     {
         switch (temperature)
         {
@@ -23,8 +39,10 @@ public record State
                 _name =  StateEnum.Warm;
                 break;
         }
+    }
 
-        DateTime = DateTime.Now;
-        Value = temperature;
+    public static State Of (DateTime dateTime, sbyte temperature)
+    {
+        return new State(dateTime,temperature);
     }
 }
