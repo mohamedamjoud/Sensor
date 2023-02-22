@@ -1,11 +1,11 @@
-using System.Security.Principal;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Adapter.Api;
 
 public record Sensor
 {
     public string State { get; set; }
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public DateTime Date { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public DateTime? Date { get; set; }
 }
