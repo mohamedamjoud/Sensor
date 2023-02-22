@@ -38,14 +38,16 @@ public class RetrieveLatestSensorStateRequests
     [When(@"We try to retrieve the latest Fifteen Sensor States Requests")]
     public async Task WhenWeTryToRetriveTheLatestFifteenSensorStatesRequests()
     {
-        var response = await _context._client.GetAsync("/api/Sensors");
+        var response = await _context._client.GetAsync("/api/RequestState");
         var content  = await response.Content.ReadAsStringAsync();
-        _retrivedSensorRequestes = JsonConvert.DeserializeObject<List<Adapter.Api.Sensor>>(content);
+        _retrivedSensorRequestes = JsonConvert.DeserializeObject<List<Adapter.Api.Sensor>>(content)
+            .Select(rsr => new Adapter.Api.Sensor { State = rsr.State }).ToList();
     }
 
     [Then(@"We got the same sensor states")]
     public void ThenWeGotTheseSensorStates()
     {
-        Assert.Equals(_sensorRequestes, _retrivedSensorRequestes);
+        _sensorRequestes.Reverse();
+        Assert.AreEqual(_sensorRequestes, _retrivedSensorRequestes);
     }
 }
