@@ -694,6 +694,19 @@
           }
         }
       },
+      "Moq.EntityFrameworkCore/7.0.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.0",
+          "Moq": "4.18.1"
+        },
+        "compile": {
+          "lib/net6.0/Moq.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Moq.EntityFrameworkCore.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -1637,6 +1650,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Adapter.SQLLit": "1.0.0",
+          "Adapter.TemperatureCaptor": "1.0.0",
+          "Newtonsoft.Json": "9.0.1",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "compile": {
@@ -1654,13 +1669,27 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Core": "1.0.0",
-          "Microsoft.EntityFrameworkCore.Sqlite": "7.0.3"
+          "Microsoft.EntityFrameworkCore.Sqlite": "7.0.3",
+          "Moq.EntityFrameworkCore": "7.0.0.2"
         },
         "compile": {
           "bin/placeholder/Adapter.SQLLit.dll": {}
         },
         "runtime": {
           "bin/placeholder/Adapter.SQLLit.dll": {}
+        }
+      },
+      "Adapter.TemperatureCaptor/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Adapter.TemperatureCaptor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Adapter.TemperatureCaptor.dll": {}
         }
       },
       "Core/1.0.0": {
@@ -2893,6 +2922,19 @@
         "moq.4.18.4.nupkg.sha512",
         "moq.nuspec",
         "moq.png"
+      ]
+    },
+    "Moq.EntityFrameworkCore/7.0.0.2": {
+      "sha512": "YRCJDexTyvx6ilJ+vMK42+wmUiVNmv4aYSpGC0y8j5YU+K1T94WsZHXiF4B3xU4eYmuzlBStXJeLxk4Hke7t2Q==",
+      "type": "package",
+      "path": "moq.entityframeworkcore/7.0.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Moq.EntityFrameworkCore.dll",
+        "moq.entityframeworkcore.7.0.0.2.nupkg.sha512",
+        "moq.entityframeworkcore.nuspec"
       ]
     },
     "NETStandard.Library/2.0.0": {
@@ -5525,6 +5567,11 @@
       "type": "project",
       "path": "../Adapter.SQLLit/Adapter.SQLLit.csproj",
       "msbuildProject": "../Adapter.SQLLit/Adapter.SQLLit.csproj"
+    },
+    "Adapter.TemperatureCaptor/1.0.0": {
+      "type": "project",
+      "path": "../Adapter.TemperatureCaptor/Adapter.TemperatureCaptor.csproj",
+      "msbuildProject": "../Adapter.TemperatureCaptor/Adapter.TemperatureCaptor.csproj"
     },
     "Core/1.0.0": {
       "type": "project",

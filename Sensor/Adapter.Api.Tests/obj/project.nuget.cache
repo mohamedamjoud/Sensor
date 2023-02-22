@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eCSCvBt6HfmAM5jd3wSXFJwA6ZKWxIYet3ZJ9BLqO344Q5EIaGVE9FzE77kcqNCiI4j8wbDyD6YqhdXDWK85Wg==",
+  "dgSpecHash": "kyFl7UpHGqykDAh8A2oNz+dFRGQbaGYxtD10WuGzspyUDn/mJPRAHcPfLZsau9lzV+/Jy2MdZ/RKwX3fiAM7vg==",
   "success": true,
   "projectFilePath": "/Users/formation/Desktop/Projects/Sensor/Sensor/Adapter.Api.Tests/Adapter.Api.Tests.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "/Users/formation/.nuget/packages/microsoft.testplatform.objectmodel/17.1.0/microsoft.testplatform.objectmodel.17.1.0.nupkg.sha512",
     "/Users/formation/.nuget/packages/microsoft.testplatform.testhost/17.1.0/microsoft.testplatform.testhost.17.1.0.nupkg.sha512",
     "/Users/formation/.nuget/packages/moq/4.18.4/moq.4.18.4.nupkg.sha512",
+    "/Users/formation/.nuget/packages/moq.entityframeworkcore/7.0.0.2/moq.entityframeworkcore.7.0.0.2.nupkg.sha512",
     "/Users/formation/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
     "/Users/formation/.nuget/packages/newtonsoft.json/9.0.1/newtonsoft.json.9.0.1.nupkg.sha512",
     "/Users/formation/.nuget/packages/nuget.frameworks/5.11.0/nuget.frameworks.5.11.0.nupkg.sha512",

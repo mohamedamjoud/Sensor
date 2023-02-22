@@ -24,7 +24,7 @@ public class SensorControllerTestes
         var sensorController = new SensorController(retriveSensorState.Object);
         
         //ActS
-        var response = await sensorController.GetSensorState();
+        var response = await sensorController.Get();
         
         //Assert
         var statusCode = ((response as IStatusCodeActionResult)!).StatusCode;
@@ -40,7 +40,7 @@ public class SensorControllerTestes
         var sensorController = new SensorController(retriveSensorState.Object);
         
         //Act
-        var response = await sensorController.GetSensorState();
+        var response = await sensorController.Get();
 
         //Assert
         var statusCode = ((response as IStatusCodeActionResult)!).StatusCode;

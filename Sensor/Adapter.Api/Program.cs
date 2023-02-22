@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddTransient<IRetrieveSensorState, RetrieveSensorState>();
+builder.Services.AddTransient<IRetrieveLatestRequestsStates, RetrieveLatestRequestsStates>();
 
 builder.Services.AddTransient<ICaptorPort, DummyTemperatureCaptor>();
 

@@ -13,18 +13,16 @@ public class SensorController : ControllerBase
         _retrieveSensorState = retrieveSensorState;
     }
     [HttpGet]
-    public async Task<IActionResult> GetSensorState()
+    public async Task<IActionResult> Get()
     {
-        string state = null;
         try
         {
-             state = await _retrieveSensorState.Execute();
+             var state = await _retrieveSensorState.Execute();
+             return Ok(new Sensor{State = state});
         }
         catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-        
-        return Ok(new Sensor{State = state}); 
     }
 }
