@@ -6,10 +6,10 @@ public record State
 {
     public string Name { get => _name.ToString(); }
     public  DateTime DateTime { get; }
-    public sbyte Value { get; }
+    public int Value { get; }
 
     private StateEnum _name;
-    public State(sbyte temperature)
+    public State(int temperature)
     {
         DateTime = DateTime.Now;
         Value = temperature;
@@ -17,7 +17,7 @@ public record State
         SetState(temperature);
     }
 
-    private State(DateTime dateTime, sbyte temperature)
+    private State(DateTime dateTime, int temperature)
     {
         DateTime = dateTime;
         Value = temperature;
@@ -25,7 +25,7 @@ public record State
         SetState(temperature);
     }
 
-    private void SetState(sbyte temperature)
+    private void SetState(int temperature)
     {
         switch (temperature)
         {
@@ -41,7 +41,7 @@ public record State
         }
     }
 
-    public static State Of (DateTime dateTime, sbyte temperature)
+    public static State Of (DateTime dateTime, int temperature)
     {
         return new State(dateTime,temperature);
     }
