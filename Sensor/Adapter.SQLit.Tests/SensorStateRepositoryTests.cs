@@ -53,10 +53,10 @@ public class SensorStateRepositoryTests
         
         //Act
         var retrievedRequestsStates =  await sensorStateRepository.GetLatestRequestsStates(size);
-        
+
         //Assert
         Assert.AreEqual(retrievedRequestsStates.Count, expectedElement);
-        Assert.AreEqual(fakeSensorStates.OrderBy(ss=>ss.DateTime).Take(size).ToList().Select(ss => State.Of(ss.DateTime,ss.Value)).ToList(), retrievedRequestsStates);
+        Assert.AreEqual(fakeSensorStates.OrderByDescending(ss=>ss.DateTime).Take(size).ToList().Select(ss => State.Of(ss.DateTime,ss.Value)).ToList(), retrievedRequestsStates);
     }
 
     private List<SensorState> GetFakeSensorStates()

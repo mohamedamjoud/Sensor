@@ -20,7 +20,7 @@ public class SensorStateRepository : Repository<SensorState>,ISensorStateReposit
 
     public async Task<List<State>> GetLatestRequestsStates(int size)
     {
-        var sensorStates =  await _context.SensorState.OrderBy(s => s.DateTime).Take(size).ToListAsync();
+        var sensorStates =  await _context.SensorState.OrderByDescending(s => s.DateTime).Take(size).ToListAsync();
         return sensorStates.Select(ss => State.Of(ss.DateTime,ss.Value)).ToList();
     }
 }
