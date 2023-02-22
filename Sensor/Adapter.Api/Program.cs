@@ -19,8 +19,7 @@ builder.Services.AddTransient<IRetrieveSensorState, RetrieveSensorState>();
 
 builder.Services.AddTransient<ICaptorPort, DummyTemperatureCaptor>();
 
-builder.Services.AddScoped<ISensorStateRepositoryPort,UnitOfWork>(); 
-
+builder.Services.AddScoped<ISensorStateRepositoryPort,SensorStateRepository>();
 builder.Services.AddScoped<IRepository<SensorState>, Repository<SensorState>>();
 
 builder.Services.AddDbContext<TemperatureContext>(opt =>

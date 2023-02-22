@@ -5,16 +5,12 @@ using Core.SpiPort;
 
 namespace Adapter.SQLLit;
 
-public class UnitOfWork : ISensorStateRepositoryPort
+public class UnitOfWork
 {
-    public IRepository<SensorState> Repository { get; }
+    public ISensorStateRepository SensorStateRepository { get; }
 
-    public UnitOfWork(IRepository<SensorState> repository)
+    public UnitOfWork(ISensorStateRepository sensorStateRepository)
     {
-        Repository = repository;
-    }
-    public async Task<int> Save(State state)
-    {
-        return await Repository.Add(new SensorState(state.Value,state.DateTime));
+        SensorStateRepository = sensorStateRepository;
     }
 }

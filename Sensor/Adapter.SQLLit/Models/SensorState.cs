@@ -12,6 +12,7 @@ public class SensorState
     
     public SensorState(sbyte value,DateTime dateTime)
     {
+        Id = 1;
         Value = value;
         DateTime = dateTime;
     }

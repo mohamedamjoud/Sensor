@@ -9,9 +9,10 @@ public class TemperatureContext: DbContext
     {
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public TemperatureContext()
     {
-        modelBuilder.Entity<SensorState>().ToTable("SensorState");
     }
-    public DbSet<SensorState> SensorState { get; set; }
+
+    
+    public virtual DbSet<SensorState> SensorState { get; set; }
 }
