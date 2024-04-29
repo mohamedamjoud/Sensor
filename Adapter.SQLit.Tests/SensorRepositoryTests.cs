@@ -21,7 +21,7 @@ public class SensorRepositoryTests
     }
 
     [Test]
-    public void Add_SaveTemperature_MethodInvoked()
+    public void Add_SaveTemperature_SaveMethodInvoked()
     {
         //Arrange
         _sensor = new Core.Domain.Sensor.Sensor(1,SensorIntervalsHelper.Value);

@@ -14,14 +14,14 @@ public record SensorResponse
     {
         State = state;
     }
-
-    public SensorResponse()
+    
+    [JsonConstructor]
+    private SensorResponse()
     {
-        
     }
-
+    
     public string State { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public DateTime? Date { get; set; }
+    public DateTime? Date { get; set;}
 }

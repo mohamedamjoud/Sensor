@@ -23,11 +23,6 @@ public class SensorControllerTestes
         _loggerMock = new Mock<ILogger<SensorController>>();
     }
 
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public async Task GetSensorState_ShouldReturnOkResultType()
     {
