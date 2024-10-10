@@ -2,26 +2,16 @@ using System.Text.Json.Serialization;
 
 namespace Adapter.Api;
 
-public record SensorResponse
+public class SensorResponse
 {
-    public SensorResponse(string state, DateTime? date)
+    public SensorResponse(string state, DateTime? date = null)
     {
         State = state;
         Date = date;
     }
 
-    public SensorResponse(string state)
-    {
-        State = state;
-    }
-    
-    [JsonConstructor]
-    private SensorResponse()
-    {
-    }
-    
-    public string State { get; set; }
+    public string State { get; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public DateTime? Date { get; set;}
+    public DateTime? Date { get; }
 }
