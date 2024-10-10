@@ -1,4 +1,3 @@
-using Adapter.SQLLit;
 using Adapter.SQLLit.Context;
 using Adapter.SQLLit.Models;
 using Adapter.SQLLit.Repository;
@@ -7,7 +6,6 @@ using Core.ApiPort;
 using Core.SpiPort;
 using Core.UseCase;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32.SafeHandles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddTransient<List<ISensorInterval>>(provider =>
+builder.Services.AddSingleton<List<ISensorInterval>>(provider =>
 {
     return builder.Configuration
         .GetSection("SensorIntervals")
@@ -23,8 +21,8 @@ builder.Services.AddTransient<List<ISensorInterval>>(provider =>
         .Select(si => Adapter.Api.SensorInterval.ToSensorInterval(si)).ToList();
 });
 
-builder.Services.AddTransient<IRetrieveSensor, RetrieveSensor>();
-builder.Services.AddTransient<IRetrieveLatestSensorRequests, RetrieveLatestSensorRequests>();
+builder.Services.AddScoped<IRetrieveSensor, RetrieveSensor>();
+builder.Services.AddScoped<IRetrieveLatestSensorRequests, RetrieveLatestSensorRequests>();
 builder.Services.AddTransient<ITemperatureSensorPort, DummyTemperatureSensor>();
 builder.Services.AddScoped<ISensorRepositoryPort,SensorRepository>();
 builder.Services.AddScoped<IRepository<Sensor>, Repository<Sensor>>();
@@ -40,9 +38,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseExceptionHandler("/Error");
+
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
