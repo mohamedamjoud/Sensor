@@ -25,7 +25,7 @@ public sealed class RetrieveSensorDefinitions
     }
 
     [Given(@"temperature value is equal to '(.*)'")]
-    public void GivenTemperatureValueIsEqualTo(sbyte temperature)
+    public void GivenTemperatureValueIsEqualTo(float temperature)
     {
         MockCaptor(temperature);
         _retrieveSensor = new RetrieveSensor(_captor.Object,_sensorRepository.Object,SensorIntervalsHelper.Value);
@@ -49,8 +49,8 @@ public sealed class RetrieveSensorDefinitions
        _sensorRepository.Verify(tr=> tr.Save(It.IsAny<Sensor>()), Times.Once());
     }
     
-    public void MockCaptor(sbyte temperature)
+    public void MockCaptor(float temperature)
     {
-        _captor.Setup(c => c.GetTemperature()).Returns(() => Task.FromResult(temperature));
+        _captor.Setup(c => c.GetTemperature()).Returns(() => temperature);
     }
 }

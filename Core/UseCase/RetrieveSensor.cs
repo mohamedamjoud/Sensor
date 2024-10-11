@@ -24,7 +24,7 @@ public class RetrieveSensor : IRetrieveSensor
     }
     public async Task<string> Execute()
     {
-        var temperature = await _temperatureSensor.GetTemperature();
+        var temperature =  _temperatureSensor.GetTemperature();
         var sensor = new Sensor(temperature,_sensorInterval);
         
         try

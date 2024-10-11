@@ -4,11 +4,15 @@ namespace Adapter.TemperatureCaptor;
 
 public class DummyTemperatureSensor : ITemperatureSensorPort
 {
-    private const sbyte EarthTemperatureMax = 100;
-    private const sbyte EarthTemperatureMin = -100;
+    private const float EarthTemperatureMax = 100.0f;
+    private const float EarthTemperatureMin = -100.0f;
     
-    public Task<sbyte> GetTemperature()
+    public float GetTemperature()
     {
-        return Task.FromResult(Convert.ToSByte(new Random().Next(EarthTemperatureMin,EarthTemperatureMax)));
+        Random random = new Random();
+    
+        float randomFloat = (float)(random.NextDouble() * (EarthTemperatureMax - EarthTemperatureMin) + EarthTemperatureMin);
+    
+        return randomFloat;
     }
 }

@@ -104,7 +104,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am adapter, I need latest \'15\' sensor states requests", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
- testRunner.When("We try to retrieve the latest \'15\' Fifteen Sensor States Requests.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("We try to retrieve the latest \'15\' sensor states requests.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
  testRunner.Then("The sensor state repository should be invoked with size \'15\' in parameters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

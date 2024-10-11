@@ -16,7 +16,7 @@ public class RetrieveLatestSensorRequests
     }
     
     [Given(@"I am adapter, I need latest '(.*)' sensor states requests")]
-    public void GivenIAmAdapterINeedLatestSensorStatesRequests(sbyte size)
+    public void GivenIAmAdapterINeedLatestSensorStatesRequests(int size)
     {
         _sensorRepository
             .Setup(str => str.RetrieveLatestSensorRequests(size, SensorIntervalsHelper.Value))
@@ -25,14 +25,14 @@ public class RetrieveLatestSensorRequests
         _retrieveLatestSensorRequests = new UseCase.RetrieveLatestSensorRequests(_sensorRepository.Object, SensorIntervalsHelper.Value);
     }
     
-    [When(@"We try to retrieve the latest Fifteen Sensor States Requests\.")]
-    public void WhenWeTryToRetrieveTheLatestFifteenSensorStatesRequests(sbyte size)
+    [When(@"We try to retrieve the latest '(.*)' sensor states requests.")]
+    public void WhenWeTryToRetrieveTheLatestFifteenSensorStatesRequests(int size)
     {
         _retrieveLatestSensorRequests.Execute(size);
     }
     
     [Then(@"The sensor state repository should be invoked with size '(.*)' in parameters")]
-    public void ThenTheSensorStateRepositoryShouldBeInvokedWithSizeInParameters(sbyte size)
+    public void ThenTheSensorStateRepositoryShouldBeInvokedWithSizeInParameters(int size)
     {
         _sensorRepository.Verify(str=> str.RetrieveLatestSensorRequests(size, SensorIntervalsHelper.Value), Times.Once());
     }

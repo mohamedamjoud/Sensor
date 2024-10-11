@@ -29,7 +29,7 @@ public class SensorStateContext : CustomWebApplicationFactory<Program>
     { 
         var captorMock = new Mock<ITemperatureSensorPort>();
         captorMock.Setup(
-            c => c.GetTemperature()).Returns(Task.FromResult(temperature));
+            c => c.GetTemperature()).Returns(temperature);
            
         _client = _factory.WithWebHostBuilder(builder =>
         {
