@@ -1,9 +1,10 @@
 using Adapter.SQLLit.Context;
+using Adapter.SQLLit.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Adapter.SQLLit.Repository;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
     protected readonly TemperatureContext _context;
 
