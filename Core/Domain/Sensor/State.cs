@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Threading.Tasks.Dataflow;
 using Core.ApiPort;
 
 namespace Core.Domain.Sensor;
@@ -12,14 +13,12 @@ public record State
 
     private StateEnum _value;
 
-    public State(int temperature, List<ISensorInterval> sensorInterval)
+    public State(float temperature, List<ISensorInterval> sensorInterval)
     {
-       
-
         SetState(temperature, sensorInterval);
     }
 
-    private void SetState(int temperature, List<ISensorInterval> sensorInterval)
+    private void SetState(float temperature, List<ISensorInterval> sensorInterval)
     {   
         int minHot = sensorInterval.Single(si => si.State == StateEnum.Hot.ToString()).Min!.Value;
         int maxCold = sensorInterval.Single(si => si.State == StateEnum.Cold.ToString()).Max!.Value;
