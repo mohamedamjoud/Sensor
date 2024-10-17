@@ -1,3 +1,4 @@
+using Adapter.Api.Providers;
 using Adapter.SQLLit.Context;
 using Adapter.SQLLit.Models;
 using Adapter.SQLLit.Repository;
@@ -13,14 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<List<ISensorInterval>>(provider =>
-{
-    return builder.Configuration
-        .GetSection("SensorIntervals")
-        .Get<List<Adapter.Api.SensorInterval>>()
-        .Select(si => Adapter.Api.SensorInterval.ToSensorInterval(si)).ToList();
-});
-
+builder.Services.AddSingleton<ISensorIntervalProvider,AppSettingsSensorIntervalProvider>();
 builder.Services.AddScoped<IRetrieveSensor, RetrieveSensor>();
 builder.Services.AddScoped<IRetrieveLatestSensorRequests, RetrieveLatestSensorRequests>();
 builder.Services.AddTransient<ITemperatureSensorPort, DummyTemperatureSensor>();

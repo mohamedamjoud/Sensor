@@ -7,14 +7,27 @@ namespace Core.UseCase;
 public class RetrieveLatestSensorRequests : IRetrieveLatestSensorRequests
 {
     private readonly ISensorRepositoryPort _sensorRepository;
-    private readonly List<ISensorInterval> _sensorIntervals;
-    public RetrieveLatestSensorRequests(ISensorRepositoryPort sensorRepository, List<ISensorInterval> sensorIntervals)
+    private readonly ISensorIntervalProvider _sensorIntervalProvider;
+    public RetrieveLatestSensorRequests(ISensorRepositoryPort sensorRepository, ISensorIntervalProvider sensorIntervalProvider)
     {
         _sensorRepository = sensorRepository;
-        _sensorIntervals = sensorIntervals;
+        _sensorIntervalProvider = sensorIntervalProvider;
     }
     public async Task<List<Sensor>> Execute(int size)
     {
-        return await _sensorRepository.RetrieveLatestSensorRequests(size,_sensorIntervals);
+        try
+        {
+            var intervals = _sensorIntervalProvider.GetIntervals();
+            var latestSensorRequest = await _sensorRepository.RetrieveLatestSensorRequests(size);
+
+            return latestSensorRequest
+                .Select(sr => new Sensor(sr.Item1, sr.Item2, intervals))
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new RetrieveSensorDataException("An error occurred while retrieving the latest sensor requests.",ex);
+        }
+       
     }
 }

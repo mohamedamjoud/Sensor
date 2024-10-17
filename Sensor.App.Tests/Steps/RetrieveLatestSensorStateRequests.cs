@@ -1,3 +1,4 @@
+using Adapter.Api.Dto;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TechTalk.SpecFlow.Assist;
@@ -9,13 +10,13 @@ public class RetrieveLatestSensorStateRequests
 {
     private HttpResponseMessage Response { get; set; } = null!;
     private SensorStateContext _context;
-    private List<Adapter.Api.SensorResponse> _sensorRequestes;
-    private List<Adapter.Api.SensorResponse> _retrivedSensorRequestes;
+    private List<SensorResponseDto> _sensorRequestes;
+    private List<SensorResponseDto> _retrivedSensorRequestes;
     
     public RetrieveLatestSensorStateRequests(SensorStateContext context)
     {
         _context = context;
-        _sensorRequestes = new List<Adapter.Api.SensorResponse>();
+        _sensorRequestes = new List<SensorResponseDto>();
     }
     
     [Given(@"The sensor returns these temperatures")]
@@ -29,7 +30,7 @@ public class RetrieveLatestSensorStateRequests
             var response = await _context._client.GetAsync("/api/Sensor");
             
             var content  = await response.Content.ReadAsStringAsync();
-            Adapter.Api.SensorResponse sensor = JsonConvert.DeserializeObject<Adapter.Api.SensorResponse>(content); 
+            SensorResponseDto sensor = JsonConvert.DeserializeObject<SensorResponseDto>(content); 
             
             _sensorRequestes.Add(sensor);
         }
@@ -40,8 +41,8 @@ public class RetrieveLatestSensorStateRequests
     {
         var response = await _context._client.GetAsync("/api/Sensor/Search");
         var content  = await response.Content.ReadAsStringAsync();
-        _retrivedSensorRequestes = JsonConvert.DeserializeObject<List<Adapter.Api.SensorResponse>>(content)
-            .Select(s => new Adapter.Api.SensorResponse(s.State,s.Date)).ToList();
+        _retrivedSensorRequestes = JsonConvert.DeserializeObject<List<SensorResponseDto>>(content)
+            .Select(s => new SensorResponseDto(s.State,s.Date)).ToList();
     }
 
     [Then(@"We got the same sensor states")]

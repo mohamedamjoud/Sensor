@@ -11,13 +11,11 @@ public class SensorRepositoryTests
 {
     private Core.Domain.Sensor.Sensor _sensor;
     private Mock<ISensorRepository> _sensorRepositoryMock;
-    
     [SetUp]
     public void Setup()
     {
         _sensorRepositoryMock = new Mock<ISensorRepository>();
-        _sensorRepositoryMock.Setup(sr=>
-            sr.Save(It.IsAny<Core.Domain.Sensor.Sensor>())).Returns(It.IsAny<Task<int>>());
+        _sensorRepositoryMock.Setup(sr=> sr.Save(It.IsAny<Core.Domain.Sensor.Sensor>())).Returns(It.IsAny<Task<int>>());
     }
 
     [Test]
@@ -41,14 +39,19 @@ public class SensorRepositoryTests
         //Arrange
         var fakeSensorStates = GetFakeSensorStates();;
         
-        var temperatureContextMock = new Mock<TemperatureContext>();
+        var options = new DbContextOptionsBuilder<TemperatureContext>()
+            .UseInMemoryDatabase("TestDatabase") // Utilisez une base de données en mémoire pour les tests
+            .Options;
+
+        var temperatureContextMock = new Mock<TemperatureContext>(options);
+
         temperatureContextMock.Setup<DbSet<Sensor>>(ss => ss.Sensors)
             .ReturnsDbSet(fakeSensorStates.ToList());
         
         SensorRepository sensorRepository = new SensorRepository(temperatureContextMock.Object);
         
         //Act
-        var retrievedRequestsStates =  await sensorRepository.RetrieveLatestSensorRequests(size,SensorIntervalsHelper.Value);
+        var retrievedRequestsStates =  await sensorRepository.RetrieveLatestSensorRequests(size);
 
         //Assert
         Assert.AreEqual(retrievedRequestsStates.Count, size);

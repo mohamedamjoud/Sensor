@@ -8,11 +8,6 @@ public class TemperatureContext: DbContext
     public TemperatureContext (DbContextOptions<TemperatureContext> options) : base(options)
     {
     }
-
-    public TemperatureContext()
-    {
-    }
-
     
     public virtual DbSet<Sensor> Sensors { get; set; }
 }

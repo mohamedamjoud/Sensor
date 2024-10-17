@@ -1,6 +1,4 @@
-using System.Linq.Expressions;
-using System.Threading.Tasks.Dataflow;
-using Core.ApiPort;
+using Core.Domain.Exception;
 
 namespace Core.Domain.Sensor;
 
@@ -13,25 +11,27 @@ public record State
 
     private StateEnum _value;
 
-    public State(float temperature, List<ISensorInterval> sensorInterval)
+    public State(float temperature, List<SensorInterval> sensorInterval)
     {
         SetState(temperature, sensorInterval);
     }
 
-    private void SetState(float temperature, List<ISensorInterval> sensorInterval)
-    {   
-        int minHot = sensorInterval.Single(si => si.State == StateEnum.Hot.ToString()).Min!.Value;
-        int maxCold = sensorInterval.Single(si => si.State == StateEnum.Cold.ToString()).Max!.Value;
-        int minWarm = sensorInterval.Single(si => si.State == StateEnum.Warm.ToString()).Min!.Value;
-        int maxWarm = sensorInterval.Single(si => si.State == StateEnum.Warm.ToString()).Max!.Value;
+    private void SetState(float temperature, List<SensorInterval> sensorInterval)
+    {
+        try
+        {
+            var interval = sensorInterval.FirstOrDefault(i => i.IsInRange(temperature));
         
-        if(temperature >= minHot)
-            _value = StateEnum.Hot;
-        else if(temperature< maxCold)
-            _value = StateEnum.Cold;
-        else if (temperature >= minWarm || temperature < maxWarm)
-            _value = StateEnum.Warm;
-        else
-            new Exception("temperature not valid");
+            if (interval != null)
+            {
+                _value = Enum.Parse<StateEnum>(interval.State, true);
+            }
+        }
+        catch (System.Exception e)
+        {
+            throw new InvalidTemperatureException($"Temperature {temperature} is not within any valid range.", e);
+        }
+     
+        
     }
 }

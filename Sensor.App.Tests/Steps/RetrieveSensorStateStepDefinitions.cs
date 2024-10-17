@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Adapter.Api.Dto;
 using Adapter.SQLLit.Context;
 using Core.SpiPort;
 using Microsoft.AspNetCore.TestHost;
@@ -48,7 +49,7 @@ public sealed class RetrieveSensorStateStepDefinitions : CustomWebApplicationFac
     public async Task ThenTheStateValueShouldBe(string expectedState)
     {
         var content  = await Response.Content.ReadAsStringAsync();
-        Adapter.Api.SensorResponse sensor = JsonConvert.DeserializeObject<Adapter.Api.SensorResponse>(content); 
+        SensorResponseDto sensor = JsonConvert.DeserializeObject<SensorResponseDto>(content); 
         Assert.AreEqual(expectedState, sensor.State);
     }
 }

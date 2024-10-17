@@ -1,28 +1,31 @@
 using Core.ApiPort;
-using Core.Domain.Sensor;
 using Core.SpiPort;
-using Core.UseCase;
 using Moq;
-using NUnit.Framework;
+
 namespace Core.Tests.Steps;
 [Binding]
 public class RetrieveLatestSensorRequests
 {
     private IRetrieveLatestSensorRequests _retrieveLatestSensorRequests;
+    private readonly Mock<ISensorIntervalProvider> _sensorIntervalProvider;
     private readonly Mock<ISensorRepositoryPort> _sensorRepository;
+    
     public RetrieveLatestSensorRequests()
     {
+        _sensorIntervalProvider = new Mock<ISensorIntervalProvider>();
         _sensorRepository = new Mock<ISensorRepositoryPort>();
+        
+        _sensorIntervalProvider.Setup(sip => sip.GetIntervals()).Returns(SensorIntervalsHelper.Value);
     }
     
     [Given(@"I am adapter, I need latest '(.*)' sensor states requests")]
     public void GivenIAmAdapterINeedLatestSensorStatesRequests(int size)
     {
         _sensorRepository
-            .Setup(str => str.RetrieveLatestSensorRequests(size, SensorIntervalsHelper.Value))
-            .Returns(Task.FromResult(new List<Sensor>()));
+            .Setup(str => str.RetrieveLatestSensorRequests(size))
+            .Returns(Task.FromResult(new List<Tuple<float,DateTime>>()));
         
-        _retrieveLatestSensorRequests = new UseCase.RetrieveLatestSensorRequests(_sensorRepository.Object, SensorIntervalsHelper.Value);
+        _retrieveLatestSensorRequests = new UseCase.RetrieveLatestSensorRequests(_sensorRepository.Object, _sensorIntervalProvider.Object);
     }
     
     [When(@"We try to retrieve the latest '(.*)' sensor states requests.")]
@@ -34,7 +37,7 @@ public class RetrieveLatestSensorRequests
     [Then(@"The sensor state repository should be invoked with size '(.*)' in parameters")]
     public void ThenTheSensorStateRepositoryShouldBeInvokedWithSizeInParameters(int size)
     {
-        _sensorRepository.Verify(str=> str.RetrieveLatestSensorRequests(size, SensorIntervalsHelper.Value), Times.Once());
+        _sensorRepository.Verify(str=> str.RetrieveLatestSensorRequests(size), Times.Once());
     }
 
 

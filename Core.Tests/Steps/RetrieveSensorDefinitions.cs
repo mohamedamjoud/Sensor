@@ -11,14 +11,21 @@ namespace Core.Tests.Steps;
 public sealed class RetrieveSensorDefinitions
 {
     private readonly Mock<ITemperatureSensorPort> _captor;
+    private readonly Mock<ISensorIntervalProvider> _sensorIntervalProvider; 
+    private readonly Mock<ISensorRepositoryPort> _sensorRepository;
+
     private IRetrieveSensor _retrieveSensor;
-    private readonly Mock<ISensorRepositoryPort> _sensorRepository; 
     private string _state;
     
+
     public RetrieveSensorDefinitions()
     {
         _captor = new Mock<ITemperatureSensorPort>();
+        _sensorIntervalProvider = new Mock<ISensorIntervalProvider>();
         _sensorRepository = new Mock<ISensorRepositoryPort>();
+
+       
+        _sensorIntervalProvider.Setup(sip => sip.GetIntervals()).Returns(SensorIntervalsHelper.Value);
         
         _sensorRepository.Setup(tr => tr.Save(It.IsAny<Sensor>())).
             Returns(() => Task.FromResult(1));
@@ -28,7 +35,7 @@ public sealed class RetrieveSensorDefinitions
     public void GivenTemperatureValueIsEqualTo(float temperature)
     {
         MockCaptor(temperature);
-        _retrieveSensor = new RetrieveSensor(_captor.Object,_sensorRepository.Object,SensorIntervalsHelper.Value);
+        _retrieveSensor = new RetrieveSensor(_captor.Object,_sensorRepository.Object, _sensorIntervalProvider.Object);
     }
 
     [When(@"we try to retrieve the sensor state")]

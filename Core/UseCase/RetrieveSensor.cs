@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
 using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.SpiPort;
@@ -11,29 +10,31 @@ public class RetrieveSensor : IRetrieveSensor
 {
     private readonly ITemperatureSensorPort _temperatureSensor;
     private readonly ISensorRepositoryPort _sensorRepository;
-    private readonly List<ISensorInterval> _sensorInterval;
+    private readonly ISensorIntervalProvider _sensorIntervalProvider;
 
     public RetrieveSensor(
         ITemperatureSensorPort temperatureSensor, 
         ISensorRepositoryPort sensorRepository,
-        List<ISensorInterval> sensorInterval)
+        ISensorIntervalProvider sensorIntervalProvider)
     {
         _temperatureSensor = temperatureSensor;
         _sensorRepository = sensorRepository;
-        _sensorInterval = sensorInterval;
+        _sensorIntervalProvider = sensorIntervalProvider;
     }
     public async Task<string> Execute()
     {
         var temperature =  _temperatureSensor.GetTemperature();
-        var sensor = new Sensor(temperature,_sensorInterval);
+        var intervals = _sensorIntervalProvider.GetIntervals();
+        
+        var sensor = new Sensor(temperature, intervals);
         
         try
         {
             await _sensorRepository.Save(sensor);
-          
         }
         catch (Exception e)
         {
+            //ToDo: separate this in another class
             throw new Exception("temperature not saved");
         }
         

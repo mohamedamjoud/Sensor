@@ -1,3 +1,4 @@
+using Adapter.Api.Dto;
 using Core.ApiPort;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ public class SensorController : ControllerBase
         {
             var state = await _retrieveSensor.Execute();
 
-            return Ok(new SensorResponse(state));
+            return Ok(new SensorResponseDto(state));
         }
         catch (Exception ex)
         {
@@ -48,13 +49,12 @@ public class SensorController : ControllerBase
     {
         try
         {
-            var configurationSize = _configuration
-                .GetSection(RetrieveLatestSensorRequestsSize).Get<int>();
+            var configurationSize = _configuration.GetSection(RetrieveLatestSensorRequestsSize).Get<int>();
             
             var sensorRequests = await _retrieveLatestSensorRequests.Execute(size ?? configurationSize);
             
             var response = sensorRequests
-                .Select(rs => new SensorResponse(rs.State.Value,rs.DateTime))
+                .Select(rs => new SensorResponseDto(rs.State.Value,rs.DateTime))
                 .ToList();
             
             return Ok(response);

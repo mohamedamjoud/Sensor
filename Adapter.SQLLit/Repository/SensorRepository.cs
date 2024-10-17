@@ -1,5 +1,4 @@
 using Adapter.SQLLit.Context;
-using Core.ApiPort;
 using Microsoft.EntityFrameworkCore;
 using Sensor = Adapter.SQLLit.Models.Sensor;
 
@@ -23,9 +22,13 @@ public class SensorRepository : Repository<Sensor>,ISensorRepository
         }
     }
 
-    public async Task<List<Core.Domain.Sensor.Sensor>> RetrieveLatestSensorRequests(int size,List<ISensorInterval> sensorIntervals)
+    public async Task<List<Tuple<float,DateTime>>> RetrieveLatestSensorRequests(int size)
     {
-        var sensors =  await _context.Sensors.OrderByDescending(s => s.DateTime).Take(size).ToListAsync();
-        return sensors.Select(ss => new Core.Domain.Sensor.Sensor(ss.Temperature,ss.DateTime,sensorIntervals)).ToList();
+        var sensors = await _context.Sensors
+            .OrderByDescending(s => s.DateTime)
+            .Take(size)
+            .ToListAsync();
+        
+        return sensors.Select(ss => new Tuple<float, DateTime>(ss.Temperature, ss.DateTime)).ToList();
     }
 }

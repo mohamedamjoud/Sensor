@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using Core.ApiPort;
-
 namespace Core.Domain.Sensor;
 
 public class Sensor
@@ -10,14 +7,14 @@ public class Sensor
     public  DateTime DateTime { get; }
 
 
-    public Sensor(float temperature, List<ISensorInterval> sensorInterval)
+    public Sensor(float temperature, List<SensorInterval> sensorInterval)
     {
         Temperature = temperature;
         DateTime = DateTime.Now;
         State = new State(temperature,sensorInterval);
     }
     
-    public Sensor(float temperature, DateTime dateTime, List<ISensorInterval> sensorInterval)
+    public Sensor(float temperature, DateTime dateTime, List<SensorInterval> sensorInterval)
     {
         Temperature = temperature;
         DateTime = dateTime;

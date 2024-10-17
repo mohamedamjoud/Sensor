@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
 
-namespace Adapter.Api;
+namespace Adapter.Api.Dto;
 
-public class SensorResponse
+public class SensorResponseDto
 {
-    public SensorResponse(string state, DateTime? date = null)
+    public SensorResponseDto(string state, DateTime? date = null)
     {
         State = state;
         Date = date;
