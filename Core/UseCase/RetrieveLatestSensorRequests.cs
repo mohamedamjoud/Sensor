@@ -17,16 +17,18 @@ public class RetrieveLatestSensorRequests : IRetrieveLatestSensorRequests
     {
         try
         {
-            var intervals = _sensorIntervalProvider.GetIntervals();
+            var intervals = _sensorIntervalProvider.GetIntervals() 
+                            ?? throw new ArgumentNullException("Sensor intervals cannot be null");
+            
             var latestSensorRequest = await _sensorRepository.RetrieveLatestSensorRequests(size);
 
             return latestSensorRequest
-                .Select(sr => new Sensor(sr.Item1, sr.Item2, intervals))
+                .Select(sr => new Sensor(sr.temperature, sr.timestamp, intervals))
                 .ToList();
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
-            throw new RetrieveSensorDataException("An error occurred while retrieving the latest sensor requests.",ex);
+            throw new RetrieveSensorDataException($"Error while retrieving sensor data for size: {size}", ex);
         }
        
     }

@@ -23,7 +23,7 @@ public class RetrieveLatestSensorRequests
     {
         _sensorRepository
             .Setup(str => str.RetrieveLatestSensorRequests(size))
-            .Returns(Task.FromResult(new List<Tuple<float,DateTime>>()));
+            .Returns(Task.FromResult(new List<(float temperature,DateTime timeStamp)>()));
         
         _retrieveLatestSensorRequests = new UseCase.RetrieveLatestSensorRequests(_sensorRepository.Object, _sensorIntervalProvider.Object);
     }

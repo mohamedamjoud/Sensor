@@ -22,13 +22,13 @@ public class SensorRepository : Repository<Sensor>,ISensorRepository
         }
     }
 
-    public async Task<List<Tuple<float,DateTime>>> RetrieveLatestSensorRequests(int size)
+    public async Task<List<(float temperature,DateTime timestamp)>> RetrieveLatestSensorRequests(int size)
     {
         var sensors = await _context.Sensors
             .OrderByDescending(s => s.DateTime)
             .Take(size)
             .ToListAsync();
         
-        return sensors.Select(ss => new Tuple<float, DateTime>(ss.Temperature, ss.DateTime)).ToList();
+        return sensors.Select(ss => (Temperature: ss.Temperature, Timestamp: ss.DateTime)).ToList();
     }
 }

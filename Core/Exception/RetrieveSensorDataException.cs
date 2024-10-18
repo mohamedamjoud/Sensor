@@ -1,8 +1,8 @@
 namespace Core.UseCase;
 
-public class RetrieveSensorDataException : Exception
+public class RetrieveSensorDataException : System.Exception
 {
-    public RetrieveSensorDataException(string message, Exception innerException): base(message,innerException)
+    public RetrieveSensorDataException(string message, System.Exception innerException): base(message,innerException)
     {
     }
 }

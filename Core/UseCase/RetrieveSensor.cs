@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Core.ApiPort;
 using Core.Domain.Sensor;
+using Core.Exception;
 using Core.SpiPort;
 
 [assembly: InternalsVisibleTo("Core.Tests")]
@@ -32,10 +33,9 @@ public class RetrieveSensor : IRetrieveSensor
         {
             await _sensorRepository.Save(sensor);
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
-            //ToDo: separate this in another class
-            throw new Exception("temperature not saved");
+            throw new SaveSensorDataException("temperature not saved", e);
         }
         
         return sensor.State.Value;

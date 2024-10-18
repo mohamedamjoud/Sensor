@@ -5,5 +5,5 @@ namespace Core.SpiPort;
 public interface ISensorRepositoryPort
 {
     Task<int> Save(Sensor sensor);
-    Task<List<Tuple<float, DateTime>>> RetrieveLatestSensorRequests(int size);
+    Task<List<(float temperature, DateTime timestamp)>> RetrieveLatestSensorRequests(int size);
 }
