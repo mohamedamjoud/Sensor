@@ -6,12 +6,11 @@ public class DummyTemperatureSensor : ITemperatureSensorPort
 {
     private const float EarthTemperatureMax = 100.0f;
     private const float EarthTemperatureMin = -100.0f;
-    
+    private readonly Random _random = new();
+
     public float GetTemperature()
     {
-        Random random = new Random();
-    
-        float randomFloat = (float)(random.NextDouble() * (EarthTemperatureMax - EarthTemperatureMin) + EarthTemperatureMin);
+        float randomFloat = (float)(_random.NextDouble() * (EarthTemperatureMax - EarthTemperatureMin) + EarthTemperatureMin);
     
         return randomFloat;
     }
