@@ -1,9 +1,9 @@
-using Adapter.SQLLit.Context;
-using Adapter.SQLLit.Exception;
-using Adapter.SQLLit.Models;
+using Adapter.SQLite.Context;
+using Adapter.SQLite.Exception;
+using Adapter.SQLite.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Adapter.SQLLit.Repository;
+namespace Adapter.SQLite.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {

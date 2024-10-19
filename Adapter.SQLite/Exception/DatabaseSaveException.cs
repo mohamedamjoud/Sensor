@@ -1,4 +1,4 @@
-namespace Adapter.SQLLit.Exception;
+namespace Adapter.SQLite.Exception;
 
 public class DatabaseSaveException : System.Exception
 {

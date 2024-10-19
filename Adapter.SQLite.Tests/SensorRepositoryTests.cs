@@ -1,11 +1,11 @@
-using Adapter.SQLLit.Context;
-using Adapter.SQLLit.Repository;
+using Adapter.SQLite.Context;
+using Adapter.SQLite.Repository;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
-using Sensor = Adapter.SQLLit.Models.Sensor;
+using Sensor = Adapter.SQLite.Models.Sensor;
 
-namespace Adapter.SQLit.Tests;
+namespace Adapter.SQLite.Tests;
 
 public class SensorRepositoryTests
 {

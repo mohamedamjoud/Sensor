@@ -1,10 +1,11 @@
-using Adapter.SQLLit.Context;
+using Adapter.SQLite.Context;
 using Microsoft.EntityFrameworkCore;
-using Sensor = Adapter.SQLLit.Models.Sensor;
+using Models_Sensor = Adapter.SQLite.Models.Sensor;
+using Sensor = Adapter.SQLite.Models.Sensor;
 
-namespace Adapter.SQLLit.Repository;
+namespace Adapter.SQLite.Repository;
 
-public class SensorRepository : Repository<Sensor>,ISensorRepository
+public class SensorRepository : Repository<Models_Sensor>,ISensorRepository
 {
     public SensorRepository(TemperatureContext context) : base(context)
     {
@@ -12,7 +13,7 @@ public class SensorRepository : Repository<Sensor>,ISensorRepository
 
     public async Task<int> Save(Core.Domain.Sensor.Sensor sensor)
     {
-        return await Add(new Sensor(sensor.Temperature, sensor.DateTime));
+        return await Add(new Models_Sensor(sensor.Temperature, sensor.DateTime));
     }
 
     public async Task<List<(float temperature,DateTime timestamp)>> RetrieveLatestSensorRequests(int size)

@@ -1,7 +1,7 @@
-﻿using Adapter.SQLLit.Models;
+﻿using Adapter.SQLite.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Adapter.SQLLit.Context;
+namespace Adapter.SQLite.Context;
 
 public class TemperatureContext: DbContext
 {

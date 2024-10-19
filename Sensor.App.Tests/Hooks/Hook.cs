@@ -1,5 +1,5 @@
 using System;
-using Adapter.SQLLit.Context;
+using Adapter.SQLite.Context;
 using BoDi;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

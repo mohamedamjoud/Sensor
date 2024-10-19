@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Adapter.Api.Dto;
-using Adapter.SQLLit.Context;
+using Adapter.SQLite.Context;
 using Core.SpiPort;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;

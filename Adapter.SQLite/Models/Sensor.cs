@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Domain.Sensor;
 
-namespace Adapter.SQLLit.Models;
+namespace Adapter.SQLite.Models;
 
 public class Sensor : IEntity
 {

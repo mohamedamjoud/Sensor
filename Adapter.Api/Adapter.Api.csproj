@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Adapter.SQLLit\Adapter.SQLLit.csproj" />
+      <ProjectReference Include="..\Adapter.SQLite\Adapter.SQLite.csproj" />
       <ProjectReference Include="..\Adapter.TemperatureSensor\Adapter.TemperatureSensor.csproj" />
     </ItemGroup>
 

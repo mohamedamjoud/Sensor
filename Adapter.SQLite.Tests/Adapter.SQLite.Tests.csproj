@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Adapter.SQLLit\Adapter.SQLLit.csproj" />
+      <ProjectReference Include="..\Adapter.SQLite\Adapter.SQLite.csproj" />
       <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 

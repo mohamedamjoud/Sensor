@@ -1,7 +1,7 @@
 using Adapter.Api.Providers;
-using Adapter.SQLLit.Context;
-using Adapter.SQLLit.Models;
-using Adapter.SQLLit.Repository;
+using Adapter.SQLite.Context;
+using Adapter.SQLite.Models;
+using Adapter.SQLite.Repository;
 using Adapter.TemperatureCaptor;
 using Core.ApiPort;
 using Core.SpiPort;

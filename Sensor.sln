@@ -16,9 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Api.Tests", "Adapte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8BBF858E-9255-4A5B-B18C-875AE237D150}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLit.Tests", "Adapter.SQLit.Tests\Adapter.SQLit.Tests.csproj", "{C3132C0C-044F-4EBA-B513-29F06E051145}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLite.Tests", "Adapter.SQLite.Tests\Adapter.SQLite.Tests.csproj", "{C3132C0C-044F-4EBA-B513-29F06E051145}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLLit", "Adapter.SQLLit\Adapter.SQLLit.csproj", "{28025D8A-B1F7-4F33-BCDD-904780F7755D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.SQLite", "Adapter.SQLite\Adapter.SQLite.csproj", "{28025D8A-B1F7-4F33-BCDD-904780F7755D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA4E394B-611E-4F72-AA1C-CCF596B5965A}"
 	ProjectSection(SolutionItems) = preProject

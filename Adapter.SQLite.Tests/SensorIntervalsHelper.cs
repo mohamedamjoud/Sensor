@@ -1,6 +1,6 @@
 using Core.Domain.Sensor;
 
-namespace Adapter.SQLit.Tests;
+namespace Adapter.SQLite.Tests;
 
 public static class SensorIntervalsHelper
 {

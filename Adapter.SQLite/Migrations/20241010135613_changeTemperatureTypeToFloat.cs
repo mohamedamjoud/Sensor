@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Adapter.SQLLit.Migrations
+namespace Adapter.SQLite.Migrations
 {
     /// <inheritdoc />
     public partial class changeTemperatureTypeToFloat : Migration

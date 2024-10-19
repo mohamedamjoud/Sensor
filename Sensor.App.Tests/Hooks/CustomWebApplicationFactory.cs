@@ -1,5 +1,5 @@
 using System.Data.Common;
-using Adapter.SQLLit.Context;
+using Adapter.SQLite.Context;
 using Core.SpiPort;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;

@@ -1,6 +1,6 @@
-using Adapter.SQLLit.Models;
+using Adapter.SQLite.Models;
 
-namespace Adapter.SQLLit.Repository;
+namespace Adapter.SQLite.Repository;
 
 public interface IRepository<TEntity> where TEntity : class, IEntity
 {  

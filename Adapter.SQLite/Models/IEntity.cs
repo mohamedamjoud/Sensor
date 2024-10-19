@@ -1,4 +1,4 @@
-namespace Adapter.SQLLit.Models;
+namespace Adapter.SQLite.Models;
 
 public interface IEntity
 { 
