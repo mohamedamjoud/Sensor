@@ -1,4 +1,5 @@
 using Adapter.SQLLit.Context;
+using Adapter.SQLLit.Exception;
 using Adapter.SQLLit.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
         }
         catch (DbUpdateException ex)
         {
-            throw new Exception("An error occurred while saving the entity.", ex);
+            throw new DatabaseSaveException("An error occurred while saving the entity.", ex);
         }
     }
     

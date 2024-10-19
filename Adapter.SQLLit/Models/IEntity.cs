@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Adapter.SQLLit.Models;
 
 public interface IEntity

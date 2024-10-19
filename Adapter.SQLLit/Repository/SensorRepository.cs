@@ -11,15 +11,8 @@ public class SensorRepository : Repository<Sensor>,ISensorRepository
     }
 
     public async Task<int> Save(Core.Domain.Sensor.Sensor sensor)
-    { 
-        try
-        {
-            return await Add(new Sensor(sensor.Temperature, sensor.DateTime));
-        }
-        catch (DbUpdateException ex)
-        {
-            throw new Exception("An error occurred while saving the entity.", ex);
-        }
+    {
+        return await Add(new Sensor(sensor.Temperature, sensor.DateTime));
     }
 
     public async Task<List<(float temperature,DateTime timestamp)>> RetrieveLatestSensorRequests(int size)
@@ -27,6 +20,7 @@ public class SensorRepository : Repository<Sensor>,ISensorRepository
         var sensors = await _context.Sensors
             .OrderByDescending(s => s.DateTime)
             .Take(size)
+            .AsNoTracking()
             .ToListAsync();
         
         return sensors.Select(ss => (Temperature: ss.Temperature, Timestamp: ss.DateTime)).ToList();
