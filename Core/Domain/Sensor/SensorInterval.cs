@@ -9,7 +9,7 @@ public class SensorInterval
     public bool IsInRange(double temperature)
     {
         bool aboveMin = !Min.HasValue || temperature >= Min.Value;
-        bool belowMax = !Max.HasValue || temperature <= Max.Value;
+        bool belowMax = !Max.HasValue || temperature < Max.Value;
 
         return aboveMin && belowMax;
     }

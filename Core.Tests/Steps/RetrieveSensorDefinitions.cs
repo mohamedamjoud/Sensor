@@ -1,32 +1,31 @@
 using Core.SpiPort;
 using Core.ApiPort;
 using Core.Domain.Sensor;
+using Core.Exception;
 using Core.UseCase;
 using Moq;
 using NUnit.Framework;
-
 namespace Core.Tests.Steps;
 
 [Binding]
 public sealed class RetrieveSensorDefinitions
 {
-    private readonly Mock<ITemperatureSensorPort> _captor;
-    private readonly Mock<ISensorIntervalProvider> _sensorIntervalProvider; 
-    private readonly Mock<ISensorRepositoryPort> _sensorRepository;
+    private Mock<ITemperatureSensorPort> _captor;
+    private Mock<ISensorIntervalProvider> _sensorIntervalProvider; 
+    private Mock<ISensorRepositoryPort> _sensorRepository;
 
     private IRetrieveSensor _retrieveSensor;
     private string _state;
-    
+    private System.Exception _capturedException;
 
-    public RetrieveSensorDefinitions()
+    [BeforeScenario]
+    public void SetUp()
     {
         _captor = new Mock<ITemperatureSensorPort>();
         _sensorIntervalProvider = new Mock<ISensorIntervalProvider>();
         _sensorRepository = new Mock<ISensorRepositoryPort>();
-
-       
-        _sensorIntervalProvider.Setup(sip => sip.GetIntervals()).Returns(SensorIntervalsHelper.Value);
         
+        _sensorIntervalProvider.Setup(sip => sip.GetIntervals()).Returns(SensorIntervalsHelper.Value);
         _sensorRepository.Setup(tr => tr.Save(It.IsAny<Sensor>())).
             Returns(() => Task.FromResult(1));
     }
@@ -34,14 +33,21 @@ public sealed class RetrieveSensorDefinitions
     [Given(@"temperature value is equal to '(.*)'")]
     public void GivenTemperatureValueIsEqualTo(float temperature)
     {
-        MockCaptor(temperature);
+        _captor.Setup(c => c.GetTemperature()).Returns(() => temperature);
         _retrieveSensor = new RetrieveSensor(_captor.Object,_sensorRepository.Object, _sensorIntervalProvider.Object);
     }
 
     [When(@"we try to retrieve the sensor state")]
-    public async void WhenWeTryToRetrieveTheSensorState()
+    public async Task WhenWeTryToRetrieveTheSensorState()
     {
-        _state = await _retrieveSensor.Execute();
+        try
+        {
+            _state = await _retrieveSensor.Execute();
+        }
+        catch (System.Exception ex)
+        {
+            _capturedException = ex;
+        }
     }
 
     [Then(@"the state value should be '(.*)'")]
@@ -50,14 +56,23 @@ public sealed class RetrieveSensorDefinitions
         Assert.AreEqual(state, _state);
     }
 
-    [Then(@"the state will be saved")]
-    public void ThenTheStateWillBeSaved()
+    [Then(@"the Sensor Data Should Be Saved")]
+    public void ThenTheSensorDataShouldBeSaved()
     {
        _sensorRepository.Verify(tr=> tr.Save(It.IsAny<Sensor>()), Times.Once());
     }
-    
-    public void MockCaptor(float temperature)
+
+    [Given(@"the sensor repository throws an exception")]
+    public void GivenTheSensorRepositoryThrowsAnException()
     {
-        _captor.Setup(c => c.GetTemperature()).Returns(() => temperature);
+        _sensorRepository.Setup(tr => tr.Save(It.IsAny<Sensor>())).
+            ThrowsAsync(new System.Exception("Database unavailable"));
+    }
+
+    [Then(@"a ""(.*)"" should be thrown")]
+    public async Task ThenAShouldBeThrown(string exceptionName)
+    {
+        Assert.IsInstanceOf(typeof(SaveSensorDataException), _capturedException);
+        Assert.AreEqual(exceptionName, _capturedException.GetType().Name);
     }
 }

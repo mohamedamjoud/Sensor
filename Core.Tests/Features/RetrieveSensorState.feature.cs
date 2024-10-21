@@ -110,7 +110,7 @@ namespace Core.Tests.Features
         testRunner.Then("the state value should be \'Hot\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 7
-        testRunner.And("the state will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the Sensor Data Should Be Saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -153,7 +153,7 @@ namespace Core.Tests.Features
         testRunner.Then("the state value should be \'Hot\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 13
-        testRunner.And("the state will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the Sensor Data Should Be Saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -198,7 +198,7 @@ namespace Core.Tests.Features
         testRunner.Then("the state value should be \'Cold\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 19
-        testRunner.And("the state will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the Sensor Data Should Be Saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -241,19 +241,19 @@ namespace Core.Tests.Features
         testRunner.Then("the state value should be \'Warm\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 25
-        testRunner.And("the state will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the Sensor Data Should Be Saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sensor state will be Hot and temperature will be saved when it\'s value is 39C°")]
-        public virtual void SensorStateWillBeHotAndTemperatureWillBeSavedWhenItsValueIs39C()
+        [NUnit.Framework.DescriptionAttribute("Sensor state will be Hot and temperature will be saved when it\'s value is 35.1C°")]
+        public virtual void SensorStateWillBeHotAndTemperatureWillBeSavedWhenItsValueIs35_1C()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sensor state will be Hot and temperature will be saved when it\'s value is 39C°", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sensor state will be Hot and temperature will be saved when it\'s value is 35.1C°", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 27
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -275,7 +275,7 @@ namespace Core.Tests.Features
             {
                 this.ScenarioStart();
 #line 28
-        testRunner.Given("temperature value is equal to \'39\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("temperature value is equal to \'35.1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 29
         testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -284,7 +284,50 @@ namespace Core.Tests.Features
         testRunner.Then("the state value should be \'Hot\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 31
-        testRunner.And("the state will be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the Sensor Data Should Be Saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Sensor data saving fails when database is unavailable")]
+        public virtual void SensorDataSavingFailsWhenDatabaseIsUnavailable()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sensor data saving fails when database is unavailable", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 33
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 34
+        testRunner.Given("temperature value is equal to \'40\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 35
+        testRunner.And("the sensor repository throws an exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 36
+        testRunner.When("we try to retrieve the sensor state", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 37
+        testRunner.Then("a \"SaveSensorDataException\" should be thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
