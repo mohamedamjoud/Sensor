@@ -109,6 +109,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
   testRunner.Then("The sensor state repository should be invoked with size \'15\' in parameters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 7
+ testRunner.Then("The result should contain \'2\' sensors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

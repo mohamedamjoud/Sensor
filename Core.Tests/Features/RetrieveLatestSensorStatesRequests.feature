@@ -4,4 +4,4 @@ Scenario: Retrieve The Latest Fifteen Sensor States Requests.
 	Given I am adapter, I need latest '15' sensor states requests
 	When We try to retrieve the latest '15' sensor states requests.
  	Then The sensor state repository should be invoked with size '15' in parameters
-	
+	Then The result should contain '2' sensors
