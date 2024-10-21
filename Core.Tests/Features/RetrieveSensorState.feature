@@ -1,34 +1,18 @@
-Feature: Retrieve sensor state          
-    Scenario: Sensor state will be Hot and temperature will be saved when it's value is 40C°
-        Given temperature value is equal to '40'   
+Feature: Retrieve sensor state
+    
+    Scenario Outline: Sensor state is determined based on temperature
+        Given temperature value is equal to '<temperature>'   
         When we try to retrieve the sensor state
-        Then the state value should be 'Hot'
+        Then the state value should be '<state>'
         And the Sensor Data Should Be Saved
-        
-    Scenario: Sensor state will be Hot and temperature will be saved when it's value is 41C°
-        Given temperature value is equal to '41'  
-        When we try to retrieve the sensor state
-        Then the state value should be 'Hot'
-        And the Sensor Data Should Be Saved
-
-    Scenario: Sensor state will be Cold and temperature will be saved when it's value is less than 22C°
-        Given temperature value is equal to '21'  
-        When we try to retrieve the sensor state
-        Then the state value should be 'Cold'
-        And the Sensor Data Should Be Saved
-
-    Scenario: Sensor state will be Warm and temperature will be saved when it's value is 22C°
-        Given temperature value is equal to '22'   
-        When we try to retrieve the sensor state
-        Then the state value should be 'Warm'
-        And the Sensor Data Should Be Saved
-     
-    Scenario: Sensor state will be Hot and temperature will be saved when it's value is 35.1C°
-        Given temperature value is equal to '35.1'  
-        When we try to retrieve the sensor state
-        Then the state value should be 'Hot'
-        And the Sensor Data Should Be Saved
-        
+        Examples: 
+          | temperature | state |
+          | 40          | Hot   |
+          | 41          | Hot   |
+          | 21          | Cold  |
+          | 22          | Warm  |
+          | 35.1        | Hot   |
+          
     Scenario: Sensor data saving fails when database is unavailable
         Given temperature value is equal to '40'
         And the sensor repository throws an exception
