@@ -4,12 +4,10 @@ using Core.SpiPort;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Newtonsoft.Json;
-using NUnit.Framework;
 using Sensor.App.Tests.Hooks;
 namespace Sensor.App.Tests.Steps;
 
-public class SensorStateContext : CustomWebApplicationFactory<Program>
+public class SensorStateContext : CustomWebApplicationFactory<Program>, IDisposable
 {
     
     public readonly CustomWebApplicationFactory<Program> _factory;
@@ -28,8 +26,7 @@ public class SensorStateContext : CustomWebApplicationFactory<Program>
     public void MockCaptorTemperature(sbyte temperature)
     { 
         var captorMock = new Mock<ITemperatureSensorPort>();
-        captorMock.Setup(
-            c => c.GetTemperature()).Returns(temperature);
+        captorMock.Setup(c => c.GetTemperature()).Returns(temperature);
            
         _client = _factory.WithWebHostBuilder(builder =>
         {
@@ -39,5 +36,15 @@ public class SensorStateContext : CustomWebApplicationFactory<Program>
             });
 
         }).CreateClient();
+    }
+    
+    public void DisposeClient()
+    {
+        _client?.Dispose();
+    }
+    public void Dispose()
+    {
+        DisposeClient();
+        _scope?.Dispose();
     }
 }

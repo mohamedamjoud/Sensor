@@ -1,10 +1,5 @@
 ﻿using System.Net;
 using Adapter.Api.Dto;
-using Adapter.SQLite.Context;
-using Core.SpiPort;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Sensor.App.Tests.Hooks;
@@ -12,11 +7,11 @@ using Sensor.App.Tests.Hooks;
 namespace Sensor.App.Tests.Steps;
 
 [Binding]
-public sealed class RetrieveSensorStateStepDefinitions : CustomWebApplicationFactory<Program>
+public sealed class RetrieveSensorStateSteps : CustomWebApplicationFactory<Program>
 {
     private HttpResponseMessage Response { get; set; } = null!;
     private SensorStateContext _context;
-    public RetrieveSensorStateStepDefinitions(SensorStateContext context)
+    public RetrieveSensorStateSteps(SensorStateContext context)
     {
         _context = context;
     }
@@ -31,6 +26,7 @@ public sealed class RetrieveSensorStateStepDefinitions : CustomWebApplicationFac
     public async Task WhenGetRequestToControllerWasMade()
     {
         Response = await _context._client.GetAsync("/api/Sensor");
+        Response.EnsureSuccessStatusCode();
     }
     
     [Then(@"the request status code will be 200")]

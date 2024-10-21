@@ -8,7 +8,6 @@ namespace Sensor.App.Tests.Steps;
 [Binding]
 public class RetrieveLatestSensorStateRequests
 {
-    private HttpResponseMessage Response { get; set; } = null!;
     private SensorStateContext _context;
     private List<SensorResponseDto> _sensorRequestes;
     private List<SensorResponseDto> _retrivedSensorRequestes;
@@ -22,15 +21,17 @@ public class RetrieveLatestSensorStateRequests
     [Given(@"The sensor returns these temperatures")]
     public async Task GivenTheSensorReturnsTheseTemperatures(Table table)
     {
-        var temperatures = table.Rows.Select(row => sbyte.Parse(row.Values.ToList()[0]));
+        var temperatures = table.Rows.Select(row => sbyte.Parse(row.Values.First()));
+
         foreach (var temperature in temperatures)
         {
             _context.MockCaptorTemperature(temperature);
             
             var response = await _context._client.GetAsync("/api/Sensor");
-            
+            response.EnsureSuccessStatusCode();
+
             var content  = await response.Content.ReadAsStringAsync();
-            SensorResponseDto sensor = JsonConvert.DeserializeObject<SensorResponseDto>(content); 
+            var  sensor = JsonConvert.DeserializeObject<SensorResponseDto>(content); 
             
             _sensorRequestes.Add(sensor);
         }
@@ -40,7 +41,9 @@ public class RetrieveLatestSensorStateRequests
     public async Task WhenWeTryToRetriveTheLatestFifteenSensorStatesRequests()
     {
         var response = await _context._client.GetAsync("/api/Sensor/Search");
-        var content  = await response.Content.ReadAsStringAsync();
+        response.EnsureSuccessStatusCode();
+
+        var content = await response.Content.ReadAsStringAsync();
         _retrivedSensorRequestes = JsonConvert.DeserializeObject<List<SensorResponseDto>>(content)
             .Select(s => new SensorResponseDto(s.State,s.Date)).ToList();
     }
@@ -50,5 +53,10 @@ public class RetrieveLatestSensorStateRequests
     {
         _sensorRequestes.Reverse();
         Assert.AreEqual(_sensorRequestes.Count, _retrivedSensorRequestes.Count);
+        
+        for (int i = 0; i < _sensorRequestes.Count; i++)
+        {
+            Assert.AreEqual(_sensorRequestes[i].State, _retrivedSensorRequestes[i].State, $"Sensor state at index {i} does not match.");
+        }
     }
 }

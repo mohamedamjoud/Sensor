@@ -15,32 +15,31 @@ public class SensorRepositoryTests
     public void Setup()
     {
         _sensorRepositoryMock = new Mock<ISensorRepository>();
-        _sensorRepositoryMock.Setup(sr=> sr.Save(It.IsAny<Core.Domain.Sensor.Sensor>())).Returns(It.IsAny<Task<int>>());
+        _sensorRepositoryMock.Setup(sr=> sr.Save(It.IsAny<Core.Domain.Sensor.Sensor>())).ReturnsAsync(1);
     }
 
     [Test]
-    public void Add_SaveTemperature_SaveMethodInvoked()
+    public async Task Add_SaveTemperature_CallsSaveMethodOnce ()
     {
         //Arrange
-        _sensor = new Core.Domain.Sensor.Sensor(1,SensorIntervalsHelper.Value);
+        _sensor = new Core.Domain.Sensor.Sensor(1,SensorIntervalsHelper.  Value);
         
         //Act
-        _sensorRepositoryMock.Object.Save(_sensor);
+        await _sensorRepositoryMock.Object.Save(_sensor);
         
         //Assert
-        _sensorRepositoryMock.Verify(r => 
-            r.Save(It.IsAny<Core.Domain.Sensor.Sensor>()), Times.Once);
+        _sensorRepositoryMock.Verify(r => r.Save(_sensor), Times.Once);
     }
 
     [TestCase(12)]
     [TestCase(5)]
-    public async Task GetAll_RetrieveNLatestSensorState_MethodeInvoked(int size)
+    public async Task GetAll_RetrieveNLatestSensorState_MethodInvoked(int size)
     {
         //Arrange
         var fakeSensorStates = GetFakeSensorStates();;
         
         var options = new DbContextOptionsBuilder<TemperatureContext>()
-            .UseInMemoryDatabase("TestDatabase") // Utilisez une base de données en mémoire pour les tests
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
         var temperatureContextMock = new Mock<TemperatureContext>(options);
@@ -54,33 +53,12 @@ public class SensorRepositoryTests
         var retrievedRequestsStates =  await sensorRepository.RetrieveLatestSensorRequests(size);
 
         //Assert
-        Assert.AreEqual(retrievedRequestsStates.Count, size);
+        Assert.AreEqual(size, retrievedRequestsStates.Count);
     }
 
     private List<Sensor> GetFakeSensorStates()
     {
-        const int dayMin = 1;
-        const int dayMax = 31;
-        const int month = 01;
-        const int year = 2022;
-
-        return new List<Sensor>()
-        {
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax))),
-            new Sensor(1, new DateTime(year,month,new Random().Next(dayMin,dayMax)))
-        };
+        var baseDate = new DateTime(2022, 01, 01);
+        return Enumerable.Range(0, 15).Select(i => new Sensor(1, baseDate.AddDays(i))).ToList();
     }
 }
