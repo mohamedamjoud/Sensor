@@ -1,5 +1,4 @@
 using Core.SpiPort;
-using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.Exception;
 using Core.UseCase;

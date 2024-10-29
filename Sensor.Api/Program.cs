@@ -4,7 +4,6 @@ using Adapter.SQLite.Context;
 using Adapter.SQLite.Models;
 using Adapter.SQLite.Repository;
 using Adapter.TemperatureCaptor;
-using Core.ApiPort;
 using Core.SpiPort;
 using Core.UseCase;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
 using Adapter.Api.Controllers;
-using Core.ApiPort;
 using Core.Domain.Sensor;
+using Core.UseCase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

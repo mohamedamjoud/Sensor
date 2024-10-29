@@ -1,7 +1,6 @@
 using Core.Domain.Sensor;
-using Core.SpiPort;
 
-namespace Core.ApiPort;
+namespace Core.UseCase;
 
 public interface IRetrieveSensor
 {

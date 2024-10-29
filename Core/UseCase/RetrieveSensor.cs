@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.Exception;
 using Core.SpiPort;

@@ -1,6 +1,6 @@
-using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.SpiPort;
+using Core.UseCase;
 using Moq;
 using NUnit.Framework;
 
