@@ -12,7 +12,7 @@ public class RetrieveLatestSensorRequests
     private readonly Mock<ISensorIntervalProvider> _sensorIntervalProvider;
     private readonly Mock<ISensorRepositoryPort> _sensorRepository;
     private List<Sensor> _result;
-
+    private List<(float temperature, DateTime timeStamp)> _mockData;
     public RetrieveLatestSensorRequests()
     {
         _sensorIntervalProvider = new Mock<ISensorIntervalProvider>();
@@ -21,10 +21,10 @@ public class RetrieveLatestSensorRequests
         _sensorIntervalProvider.Setup(sip => sip.GetIntervals()).Returns(SensorIntervalsHelper.Value);
     }
     
-    [Given(@"I am adapter, I need latest '(.*)' sensor states requests")]
+    [Given(@"a request for the latest '(.*)' sensor state records")]
     public void GivenIAmAdapterINeedLatestSensorStatesRequests(int size)
     {
-        var mockData = new List<(float temperature, DateTime timeStamp)>
+        _mockData = new List<(float temperature, DateTime timeStamp)>
         {
             (30.5f, DateTime.Now.AddMinutes(-5)),
             (28.1f, DateTime.Now.AddMinutes(-10))
@@ -32,26 +32,26 @@ public class RetrieveLatestSensorRequests
         
         _sensorRepository
             .Setup(str => str.RetrieveLatestSensorRequests(size))
-            .Returns(Task.FromResult(mockData));
+            .Returns(Task.FromResult(_mockData));
         
         _retrieveLatestSensorRequests = new UseCase.RetrieveLatestSensorRequests(_sensorRepository.Object, _sensorIntervalProvider.Object);
     }
     
-    [When(@"We try to retrieve the latest '(.*)' sensor states requests.")]
+    [When(@"the system retrieves the latest '(.*)' sensor states")]
     public async Task WhenWeTryToRetrieveTheLatestFifteenSensorStatesRequests(int size)
     {
         _result = await _retrieveLatestSensorRequests.Execute(size);
     }
     
-    [Then(@"The sensor state repository should be invoked with size '(.*)' in parameters")]
+    [Then(@"the system should retrieve exactly '(.*)' sensor states")]
     public void ThenTheSensorStateRepositoryShouldBeInvokedWithSizeInParameters(int size)
     {
         _sensorRepository.Verify(str=> str.RetrieveLatestSensorRequests(size), Times.Once());
     }
 
-    [Then(@"The result should contain '(.*)' sensors")]
-    public void ThenTheResultShouldContainNSensors(int count)
+    [Then(@"the result should contain the expected number of sensors")]
+    public void ThenTheResultShouldContainNSensors()
     {
-        Assert.AreEqual(count, _result.Count);
+        Assert.AreEqual(_mockData.Count, _result.Count);
     }
 }
