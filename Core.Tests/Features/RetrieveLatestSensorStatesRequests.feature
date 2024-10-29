@@ -1,7 +1,7 @@
 Feature: Retrieve Latest Sensor States Requests
 
 Scenario: Retrieve The Latest Fifteen Sensor States Requests.
-	Given I am adapter, I need latest '15' sensor states requests
-	When We try to retrieve the latest '15' sensor states requests.
- 	Then The sensor state repository should be invoked with size '15' in parameters
-	Then The result should contain '2' sensors
+	Given a request for the latest '15' sensor state records
+	When the system retrieves the latest '15' sensor states
+ 	Then the system should retrieve exactly '15' sensor states
+	And the result should contain the expected number of sensors

@@ -1,4 +1,3 @@
-using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.SpiPort;
 

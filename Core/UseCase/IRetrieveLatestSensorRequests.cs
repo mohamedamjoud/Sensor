@@ -1,6 +1,6 @@
 using Core.Domain.Sensor;
 
-namespace Core.ApiPort;
+namespace Core.UseCase;
 
 public interface IRetrieveLatestSensorRequests
 {

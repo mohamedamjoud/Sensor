@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Adapter.Api.Dto;
+using Core.Domain.Sensor;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Sensor.App.Tests.Hooks;
@@ -42,7 +43,7 @@ public sealed class RetrieveSensorStateSteps : CustomWebApplicationFactory<Progr
     }
     
     [Then(@"the state value should be '(.*)'")]
-    public async Task ThenTheStateValueShouldBe(string expectedState)
+    public async Task ThenTheStateValueShouldBe(StateEnum expectedState)
     {
         var content  = await Response.Content.ReadAsStringAsync();
         SensorResponseDto sensor = JsonConvert.DeserializeObject<SensorResponseDto>(content); 

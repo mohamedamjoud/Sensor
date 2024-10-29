@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Adapter.Api\Adapter.Api.csproj" />
+      <ProjectReference Include="..\Sensor.Api\Sensor.Api.csproj" />
     </ItemGroup>
 
 </Project>

@@ -5,22 +5,22 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
-COPY ["Adapter.Api/Adapter.Api.csproj", "Adapter.Api/"]
-COPY ["Adapter.Api/Temperature.db", "Adapter.Api/"]
-COPY ["Adapter.SQLLit/Adapter.SQLLit.csproj", "Adapter.SQLLit/"]
+COPY ["Sensor.Api/Sensor.Api.csproj", "Sensor.Api/"]
+COPY ["Sensor.Api/DataBase/Temperature.db", "Sensor.Api/"]
+COPY ["Adapter.SQLite/Adapter.SQLite.csproj", "Adapter.SQLite/"]
 COPY ["Adapter.TemperatureSensor/Adapter.TemperatureSensor.csproj", "Adapter.TemperatureSensor/"]
 COPY ["Core/Core.csproj", "Core/"]
 
-RUN dotnet restore "Adapter.Api/Adapter.Api.csproj"
+RUN dotnet restore "Sensor.Api/Sensor.Api.csproj"
 COPY . .
-WORKDIR "/src/Adapter.Api"
-RUN dotnet build "Adapter.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/Sensor.Api"
+RUN dotnet build "Sensor.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Adapter.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Sensor.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /src/Adapter.Api/Temperature_Prod.db .
+COPY --from=publish /src/Sensor.Api/DataBase/Temperature_Prod.db .
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Adapter.Api.dll"]
+ENTRYPOINT ["dotnet", "Sensor.Api.dll"]

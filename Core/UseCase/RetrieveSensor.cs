@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using Core.ApiPort;
 using Core.Domain.Sensor;
 using Core.Exception;
 using Core.SpiPort;
@@ -22,7 +21,7 @@ public class RetrieveSensor : IRetrieveSensor
         _sensorRepository = sensorRepository;
         _sensorIntervalProvider = sensorIntervalProvider;
     }
-    public async Task<string> Execute()
+    public async Task<StateEnum> Execute()
     {
         var temperature =  _temperatureSensor.GetTemperature();
         var intervals = _sensorIntervalProvider.GetIntervals();

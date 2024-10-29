@@ -1,5 +1,5 @@
 using Adapter.Api.Dto;
-using Core.ApiPort;
+using Core.UseCase;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Adapter.Api.Controllers;

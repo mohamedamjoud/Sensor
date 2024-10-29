@@ -1,6 +1,6 @@
 using Adapter.Api.Controllers;
-using Core.ApiPort;
 using Core.Domain.Sensor;
+using Core.UseCase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +36,7 @@ public class SensorControllerTests
     {
         //Arrange
         var mockRetrieveState = new Mock<IRetrieveSensor>();
-        mockRetrieveState.Setup(rss => rss.Execute()).Returns(Task.FromResult("Hot"));
+        mockRetrieveState.Setup(rss => rss.Execute()).Returns(Task.FromResult(StateEnum.Hot));
         
         var mockRetrieveLatestSensorRequests = new Mock<IRetrieveLatestSensorRequests>();
         
