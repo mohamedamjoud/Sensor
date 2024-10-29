@@ -36,7 +36,7 @@ public class SensorControllerTests
     {
         //Arrange
         var mockRetrieveState = new Mock<IRetrieveSensor>();
-        mockRetrieveState.Setup(rss => rss.Execute()).Returns(Task.FromResult("Hot"));
+        mockRetrieveState.Setup(rss => rss.Execute()).Returns(Task.FromResult(StateEnum.Hot));
         
         var mockRetrieveLatestSensorRequests = new Mock<IRetrieveLatestSensorRequests>();
         

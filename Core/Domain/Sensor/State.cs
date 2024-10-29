@@ -4,13 +4,8 @@ namespace Core.Domain.Sensor;
 
 public record State
 {
-    public string Value
-    {
-        get => _value.ToString();
-    }
-
-    private StateEnum _value;
-
+    public StateEnum Value { get; private set; }
+    
     public State(float temperature, List<SensorInterval> sensorInterval)
     {
         SetState(temperature, sensorInterval);
@@ -24,14 +19,12 @@ public record State
         
             if (interval != null)
             {
-                _value = Enum.Parse<StateEnum>(interval.State, true);
+                Value = Enum.Parse<StateEnum>(interval.State, true);
             }
         }
         catch (System.Exception e)
         {
             throw new InvalidTemperatureException($"Temperature {temperature} is not within any valid range.", e);
         }
-     
-        
     }
 }

@@ -15,7 +15,7 @@ public sealed class RetrieveSensorDefinitions
     private Mock<ISensorRepositoryPort> _sensorRepository;
 
     private IRetrieveSensor _retrieveSensor;
-    private string _state;
+    private StateEnum _state;
     private System.Exception _capturedException;
 
     [BeforeScenario]
@@ -51,7 +51,7 @@ public sealed class RetrieveSensorDefinitions
     }
 
     [Then(@"the state value should be '(.*)'")]
-    public void ThenTheStateValueShouldBe(string state)
+    public void ThenTheStateValueShouldBe(StateEnum state)
     {
         Assert.AreEqual(state, _state);
     }
