@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Api", "Adapter.Api\Adapter.Api.csproj", "{3A83B809-2B07-4B21-B3D6-2D492CEA5411}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sensor.Api", "Sensor.Api\Sensor.Api.csproj", "{3A83B809-2B07-4B21-B3D6-2D492CEA5411}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{284225CE-4237-43E8-A415-4FFD6C74DCEE}"
 EndProject
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sensor.App.Tests", "Sensor.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{CBE5C05F-F79C-426B-A7AA-CD7947E55972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Api.Tests", "Adapter.Api.Tests\Adapter.Api.Tests.csproj", "{F3C5E1A8-66E9-441A-8E7D-798D31C3EAB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sensor.Api.Tests", "Sensor.Api.Tests\Sensor.Api.Tests.csproj", "{F3C5E1A8-66E9-441A-8E7D-798D31C3EAB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8BBF858E-9255-4A5B-B18C-875AE237D150}"
 EndProject
